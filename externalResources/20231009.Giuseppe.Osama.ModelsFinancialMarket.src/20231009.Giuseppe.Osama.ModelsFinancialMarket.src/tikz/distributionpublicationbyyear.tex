@@ -1,0 +1,118 @@
+%\begin{tikzpicture}
+%\centering
+%\begin{axis} [ 
+ %   %tiny,
+  %  scale only axis,
+  % ybar, 
+   % xmin=1996, xmax=2022,
+   % ymin=0, ymax=45, 
+   % bar width=.60*\barWidth,
+   %grid=false,
+   % height= \axisHeight,
+   %width= \axisWidth, 
+   %enlargelimits=false,
+    %axis equal image,
+	%x tick label style={/pgf/number format/1000 sep=},
+%	xlabel=Publication Year,
+%%	ylabel=\# Studies,
+  %  xticklabel style={rotate=90},
+    %%% FROM HERE UPWARDS ITS ORIGINAL %%%
+	%xtick={
+ %%% BORROWED FROM COUNTRY %%%
+ \begin{tikzpicture}
+  \centering
+  \begin{axis}[
+        tiny,
+        scale only axis,
+        ybar,
+        % axis on top,
+        height=\axisHeight,
+        width=\axisWidth,
+        bar width= 0.60*\barWidth,
+        % x=-0.5,
+        % ymajorgrids,
+        % tick align=inside,
+        % major grid style={draw=white},
+        enlarge y limits=false,
+        %axis equal image,
+        x tick label style={/pgf/number format/1000 sep=},
+        % legend pos = north east,
+        % legend style={at={(1, 1.2)},anchor=north},
+        xmin=1996, xmax=2022,
+        ymin=0, ymax=45,
+        % axis x line*=bottom,
+        % axis y line*=right,
+        % y axis line style={opacity=0},
+        % tickwidth=0pt,
+        % enlarge x limits=true,
+        % legend style={
+        %     at={(0.3,0.95)},
+        %     anchor=north,
+        %     legend columns=-1,
+        %     /tikz/every even column/.append style={column sep=0.5cm}
+        % },
+        %ylabel={\# Studies},
+        xlabel=Publication Year,
+	    ylabel=\# Studies,
+        xticklabel style={rotate=90},
+        symbolic x coords={
+1996,
+1998,
+2001,
+2002,
+2004,
+2005,
+2007,
+2008,
+2009,
+2010,
+2011,
+2012,
+2013,
+2014,
+2015,
+2016,
+2017,
+2018,
+2019,
+2020,
+2021,
+2022,
+}, 
+    %ytick={5,10,15,20,25,30,35,40,45,50},
+    % enlarge x limits=true,
+% 	enlargelimits=0.05,
+% 	legend style={at={(0.5,-0.1)},
+% 	anchor=north,legend columns=-1},
+% 	ybar interval=0.7,
+     % nodes near coords={
+      % \pgfmathprintnumber[precision=1]{\pgfplotspointmeta}
+      %}
+]
+\addplot [draw=barDrawColor,fill=barFillColor] coordinates {
+    (1996, 1)
+    (1998, 1)
+    (2001, 1)
+    (2002, 1)
+    (2004, 1)
+    (2005, 1)
+    (2007, 2)
+    (2008, 1)
+    (2009, 5)
+    (2010, 2)
+    (2011, 3)
+    (2012, 4)
+    (2013, 3)
+    (2014, 1)
+    (2015, 7)
+    (2016, 7)
+    (2017, 11)
+    (2018, 13)
+    (2019, 24)
+    (2020, 35)
+    (2021, 37) %     (2013, 5)
+    (2022, 43) %    (2020, 5)
+    % (2021, 0)
+};
+\end{axis}
+\end{tikzpicture}

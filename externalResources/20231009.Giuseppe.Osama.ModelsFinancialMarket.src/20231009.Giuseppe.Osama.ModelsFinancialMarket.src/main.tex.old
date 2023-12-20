@@ -1,0 +1,1025 @@
+\documentclass[nogrid,nosurname,sort&compress]{RFS}
+%\usepackage[author,round]{natbib}
+%\usepackage[english]{babel}
+%\usepackage[square,numbers]{natbib}
+%\bibliographystyle{abbrvnat}
+
+\usepackage{soul}
+\usepackage{paralist}
+    \newenvironment{paraenum}{\begin{inparaenum}[\itshape a)\upshape]}{\end{inparaenum}}
+\usepackage[capitalize, noabbrev]{cleveref}
+\usepackage{tabularx}
+\usepackage{changepage,threeparttable}
+\usepackage{tikz} 
+\usepackage{pgf-pie} 
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+    \usepgfplotslibrary{groupplots,dateplot}
+    \pgfplotsset{compat=newest}
+
+
+
+
+  \newcommand{\globalTikzScale}{1}
+
+  \newcommand{\axisHeight}{5cm}
+  \newcommand{\axisWidth}{10cm}
+  \newcommand{\barWidth}{0.25cm}
+  
+\definecolor{barFillColor1}{rgb}{1,1,1}
+\definecolor{barDrawColor1}{rgb}{0,0,0}
+
+% Bar charts which have only 2 plot
+% Second colors
+\definecolor{barFillColor2}{rgb}{0,0,0}
+\definecolor{barDrawColor2}{rgb}{0,0,0}
+
+% Bar charts which have only 1 plot
+\definecolor{barFillColor}{rgb}{1,1,1}
+\definecolor{barDrawColor}{rgb}{0,0,0}
+
+% Pie Charts
+\definecolor{pieFillColor}{rgb}{1,1,1}
+
+\makeatletter
+\gdef\copyrightline{Published by Oxford   
+University Press on behalf of The Society for Financial Studies 2014.}
+\makeatother
+
+\def\DOI{Sample}
+\def\volumenumber{00}
+\def\volumeissue{0}
+\def\volumeyear{2015}
+
+\setcounter{page}{1}
+
+\access{Advance Access publication September 21, 2014}
+
+
+\def\mystar{\relax}
+
+\def\tciLaplace{\mathcal{L}}
+\def\dint{\mathop{\displaystyle \int}}  
+
+\begin{document}
+
+\title{Modeling the Trends Of Assets In The Financial Market With Machine Learning: A Systematic Literature Review}
+
+\author{Randall Lionel Kharkrang}
+\affiliation{  
+  Innopolis University,
+  Innopolis,
+  Russia,
+   l.kharkrang@innopolis.university}
+
+
+\author{Giancarlo Succi}
+\affiliation{  
+  Universit\`{a} di Bologna,
+  Bologna,
+  Italy,\
+   g.succi@unibo.it}
+
+
+\author{Miras Tokanov}
+\affiliation{  
+ Innopolis University,
+ Innopolis,
+  Russia,\
+  m.tokanov@innopolis.university}
+
+\abstract{People have been trading for centuries, taking into account the possible change in the price of a particular product. With the development of machine learning, traders can rely on machines and their forecasting abilities. This study used a literature review method to analyze various studies to determine the type of analysis, the pre-processing methods used and the models most commonly used. This study gathered more than 200 papers from 1996 to 2022, which were chosen based on prepared criteria.
+Proposed work should assist researchers in structuring this emerging field and identifying the particular elements that require additional research.}
+
+\maketitle
+
+\section{Introduction}\label{S:introduction}
+
+The stock market is a place where traders can come to buy and sell a company's stock. With the passage of time, an increasing number of individuals are becoming interested in the stock market. People's growing interest in this subject makes it more important for research. 
+
+The stock market is a volatile systems consisting of millions of data points per day, and people's livelihood are at stake when they invest in a stake. A human or team of humans, would not cognitively be able to handle all these inputs and changes in seconds notice, especially when it is their money. Automated Stock trading provides an alternative and efficient approach to stock trading and prediction that relies on mathematical precision and computing power. As far back as 1973, where \cite{rosenberg1973} have used probabilistic models for predicting risk of returns from stocks. As the decades go by, and more computing power increased, more sophisticated techniques evolved for stock prediction/ asset evolution. We will address these advances in the context of Machine Learning.
+
+According to \cite{okoli2015guide}, a Systematic Literature Review (SLR) is “a systematic, explicit, and reproducible method for identifying, evaluating, and synthesizing the existing body of completed and recorded work produced by researchers, scholars, and practitioners”. A SLR then offers the reader a vast and comprehensive analysis of the research conducted in the field, while also critically synthesizing research in ways that can be beneficial for a larger audience. A rigorous standalone literature review must be systematic in following a methodological approach, explicit in explaining the procedures by which it was
+conducted, comprehensive in its scope of including all relevant material, and, hence, reproducible by others who would follow the same approach in reviewing the topic. SLRs are important tools as they offer a baseline for scientific progress and for this reason are increasingly used by researchers. \cite{ozbayoglu2020survey}
+\textcolor{red}{\bf (Explain this work and why it is relevant today.)}
+
+\section{Related Work}
+ Asset Evolution has been built on the foundation of CAPM developed by \cite{shih2014evolution} tracks the evolution of CAPM over the decades which eventually led us to our review of today.
+
+\label{S:RelatedWorks}
+
+\hl{We can divide the related works into 4 categories as follows:}
+
+\begin{itemize}
+
+\item Studies that review and compare various Deep Learning and Machine Learning algorithms.
+\item Studies that apply specific techniques or a pipeline of techniques.
+\item Studies which delve into information retrieval of relevant financial technicalities.
+\item Studies that use State of the Art Deep Learning Techniques that resemble data representations that can be used to model financial assets
+
+% \item Studies that deal with actions \\
+
+% \item Studies which deal with anomalies \\
+
+\end{itemize}
+
+The field of finance has recently received a boom with regards to applications of Machine Learning and Deep Learning models \cite{ozbayoglu2020survey}.
+
+Finance is an extremely diverse field ranging from Asset and Portfolio Management, Risk Assessment, Fraud Detection and many others. 
+
+In this SLR we want to explore various methods and ways by which Machine Learning has been used in Asset Evolution. 
+
+So far, we have found no relevant SLR that deals with modelling how a financial asset evolves over time, and taking into account textual data like news articles/tweets. However various papers and SLRs have attempted to study and compare various methods using machine learning to financial datasets as found in \cite{Zhang2022}, \cite{Feng2018}, \cite{thakkar2021}. In contention to the methodologies involved, Support Vector Machines performed the best, whilst in the deep learning aspect, LSTMs and Attention based approaches saw optimal performance. As mentioned in \cite{Sharma2019}, social media plays an important role in forecasting stock market returns. The main goals of this module are to use social media to access market sentiment and predict the behavior of a specific company's stock, classify the polarity of given text at the Document, sentence, or feature level and determine whether opinion in text is positive, negative, or neutral, and use machine learning algorithms to predict sentiment and find correlation between sentiment and stock prices. \cite{islam2020} address forex currency prediction and conducted a review of the current state of the art, which showed that SVMs and Neural Networks were the dominant approaches. Other methodologies like Chaos Theory were also addressed by \cite{islam2020}. \cite{Ferrer2022} presents a comprehensive survey of asset management in terms of price forecasting and value investing. SVR was concluded to be the highest performing model architecture. Neural networks showed excellent in-sample performance but mediocre out-of-sample performance. \cite{broby2022} discusses the use of predictive analytics in the field of finance as a whole, in terms of customer segmentation, Audit and Compliance Prediction, Stock Price, returns and volatility prediction etc. and also mentions the lack of using machine learning for unstructured data. \cite{sharaf2022survey} talks in depth about the theoretical background and state of the art methodologies of recommender systems and their lack of usage in financial systems and finally addresses their strengths and weaknesses of the various types of recommender systems i.e., collaborative recommendation, content based etc. \cite{saha2022} introduces a graph based formulation for stock movement prediction, describes the theoretical graph theory background, and uses graph neural networks. 
+
+\textcolor{red}{\bf (Discuss the field in generic terms and other SLRs that you may have encountered.)}
+
+
+%%%%%%%%%%%%
+
+\section{Structure of the Systematic Literature Review} \label{S:StructureSLR}
+ \hl{One of the main goals of this systematic literature review (SLR) is to summarise and categorize Machine Learning models and datasets used in asset allocation, asset evolution, asset management and other asset optimization methodologies that are reported in the literature.}
+%%%% MIGHT BE CREATED BY THE ONE IN CROP.STY "picture(0,0)..."
+ Besides providing us with a state-of-the-art summary of current research on this topic, this work will also contribute to highlighting issues that need to be solved as well as open gaps in the literature. This SLR will therefore be beneficial for researchers, developers, and various other types of IT practitioners and for anyone interested in software engineering, as it will allow them to:
+
+\begin{paraenum} \label{E:slrObjectives}
+
+    \item Easily identify the best performing ML architectures in asset evolution;
+
+    \item Identify the most promising research directions for future work;
+
+    \item Develop new, more effective strategies for dealing with asset evolution from various sources
+
+    \item Integrate NLP into the decision pipeline
+
+\end{paraenum}
+
+This work is organized as follows: ~\Cref{S:protocolDevelopment} presents our methodology and outlines our research protocol;~\Cref{S:results} discusses the main results of our work, while clustering and classifying them in meaningful ways;~\Cref{S:discussion} offers a critical interpretation of our findings and specific answers to our research questions;~\Cref{S:limitationsThreatsAssessment} evaluates the limitations and various other shortcomings potentially affecting our SLR, while~\cref{S:conclusion} summarizes what we achieved and points out future research plans/directions.
+
+\section{Protocol Development} \label{S:protocolDevelopment}
+
+\subsection{Research Questions} \label{S:ResearchQuestions}
+
+One of the most important step in the production of an SLR involves the individuation of a research question (or of a series of research questions) that can be used to guide and inform its development. The research questions characterising this work are:
+
+% \end{description}
+
+\begin{enumerate}\label{T:researchQuestions}
+
+\item [\textbf{RQ}$_1$]What are the most effective ML models and tools to predict the evolution of an asset in the financial market? \label{Word:RQ1}
+
+% Suggestion(Miras)
+\item [\textbf{RQ}$_2$]{What are existing approaches for forecasting stock price trend based on news or tweets?
+}\label{Word:RQ2}
+
+\item [\textbf{RQ}$_3$]{How accurately can machine learning models predict the stock price?
+}\label{Word:RQ3}
+% end
+\end{enumerate}
+
+
+The motivation for \textbf{RQ1} comes from the requirement to search, gather, and explore  the machine Learning models and deep learning models that effectively show good modelling and predictive performance on datasets revolving financial assets
+
+The motivation for \textbf{RQ2} was to explore state-of-the-art NLP methods that could process text from news sites and other sources of information and predict the impact on the price of goods (stock or token price) in the financial market.
+
+The motivation for \textbf{RQ3} was to gather efficient features or relevant visual information or embeddings that may not necessarily come from natural language, to further strengthen and utilize collection of
+
+
+\subsection{Literature Search}\label{S:literatureSearch}
+This section explains the research approach and methodology used to gather the studies included in our final reading log. 
+
+% \subsubsection{Search Keywords}
+\textbf{Search Keywords}:\\
+\label{S:searchKeywords}
+We extracted from the three research questions we formulated above a series of relevant keywords that we believed might adequately characterise them. The keywords we selected for this study are: 
+\begin{paraenum}
+\item Asset Evolution,
+%\item   {\hl{Repository issue}},
+%\item   {\hl{}}, 
+\item Asset pricing,
+\item Asset Management, 
+\item Deep Learning,
+\item Machine Learning,
+\item Mathematical Finance,
+%\item   {\item   {
+
+\end{paraenum}
+
+
+\textbf{Selected Databases}:\\ \label{S:searchResources}
+We selected a series of databases, which we used to perform our initial searches. The databases we selected are: 
+\begin{paraenum}\label{E:searchResources}
+\item ScienceDirect,
+\item SpringerLink,
+\item SSRN,
+\item Google Scholar,
+\item Scopus,
+\item MDPI,
+\item IEEE
+\end{paraenum}
+
+We recognize that the list of selected databases might not be the most comprehensive; however, we also note that these databases are among those that researchers most frequently use in their daily practice. In addition, these databases typically gather scholarly research from the most relevant sources in Computer Science and Finance.
+
+% \subsubsection{Search Queries}
+\textbf{Search Queries}:\label{S:searchQueries}
+
+We then arranged the keywords we previously selected into more focused search queries by using Boolean operators. The list of search queries we developed follows below:
+
+% \begin{description}\label{T:searchQueries}
+\begin{enumerate}\label{T:searchQueries}
+
+    \item[\textbf{Q$_1$}]
+    % [Query 1: amedlabel{Word:SearchQuery1}{Query 1}]
+    (  {Deep Learning} OR   {Machine Learning} ) AND   {Deep Learning} AND   {Asset} AND (  {evolution} OR   {pricing} \label{Word:SearchQuery1}
+    
+    
+    \item[\textbf{Q$_2$}]
+    % [Query 2: amedlabel{Word:SearchQuery2}{Query 2}]
+    (  {information retrieval} ) AND (   {Asset}) AND (  {Evolution} OR   {Pricing} OR   {Forecasting})  \label{Word:SearchQuery2}
+
+    \item[\textbf{Q$_3$}]
+    (  {Sentiment} AND   {Stock price} ) AND (  {Prediction} OR   {Forecasting}) \\ \label{Word:SearchQuery3}
+    %\item
+    % [Query 4: amedlabel{Word:SearchQuery4}{Query 4}]
+    %(  {anomaly} OR   {defect} OR   {fault}) AND  (  {software measure} OR   {software metric}) \\ \label{Word:SearchQuery4}
+    % \item ((  {anomalous commit} OR   {unusual commit}) OR (  {anomalous event} OR   {unusual event})) AND   {open source} AND   {repository} AND   {software} AND (  {metric} OR   {measure}) \\
+\end{enumerate} 
+
+
+\begin{table}
+\caption{Database Papers Found. 
+% The column \quotes{Keyword} shows the search terms used to formulate our search queries, whereas the remaining columns show the results of the keyword on each search database.}
+% \label{T:searchQueriesResults}
+}
+\label{T:searchQueriesResults}
+% \begin{tabularx}{\linewidth}{l r r r r r r}
+
+    \begin{tabularx}{\linewidth}{X r r r}
+    \toprule
+    
+    
+    
+    \textbf{Searched Databases} &  \textbf{Q1} & \textbf{Q2} & \textbf{Q3}   \\
+    
+    \midrule
+    
+    Google Scholar & 306,000 & 199,000 & 622,000   \\
+    SSRN & 146 & 0 & 5  \\
+    Scopus & 35 & 72 & 72  \\
+    ScienceDirect & 11,451 & 11,438 & 9329 \\
+    IEEE Xplore & 5 & 7 & 135  \\
+    Springer-Link & 30669 & 26,212 & 26,948  \\
+    MDPI & 4 & 4 & 3 \\
+    ACM & 0 & 0 & 2,246 \\
+    Arxiv & 0 & 0 & 4 \\
+    
+    \bottomrule
+
+    \end{tabularx}
+\end{table}
+
+
+\textbf{Inclusion and Exclusion Criteria}:\\ \label{S:criteria}
+We applied a set of inclusion and exclusion criteria to determine which papers obtained from our preliminary searches should be included in the final reading log. In other words, the Inclusion and Exclusion criteria were used to ensure that only the most relevant sources were accepted in the SLR. 
+
+ In the context of this SLR, the following criteria were used for inclusion:
+
+\begin{enumerate}\label{T:inclusionCriteria}
+
+\item[\textbf{{IC}$_1$}]
+% [IC1 amedlabel{Word:IC1}{IC1}] 
+The  paper  is  published  in  a  peer-reviewed  journal or in a conference. \label{Word:IC1}
+\item[\textbf{{IC}$_2$}]
+% [IC2 amedlabel{Word:IC2}{IC2}] 
+The  paper  is  related  to  finance/Machine learning. \label{Word:IC2}
+\item[\textbf{{IC}$_3$}]
+% [IC3 amedlabel{Word:IC3}{IC3}] 
+The paper uses Machine Learning And Statistics.  \label{Word:IC3}
+\item[\textbf{{IC}$_4$}]
+% [IC4 amedlabel{Word:IC4}{IC4}]
+The paper provides quantitative measurements or metrics involved and used by the finance sector \label{Word:IC4}
+\item[\textbf{{IC}$_5$}]
+% [IC5 amedlabel{Word:IC5}{IC5}]
+The paper reports adopted preventive or corrective actions with respect to Asset Evolution/management \label{Word:IC5}
+\end{enumerate}
+
+The exclusion criteria we used in this SLR are as follows:
+% in~\cref{T:exclusionCriteria}.
+
+
+\begin{enumerate} \label{T:exclusionCriteria}
+
+\item[\textbf{{EC}$_1$}]
+% [EC1 amedlabel{Word:EC1}{EC1}]
+The  paper  is  not  written  in  English. \label{Word:EC1} \\
+\item[\textbf{{EC}$_2$}]
+% [EC2 amedlabel{Word:EC2}{EC2}] 
+The paper is an abstract, poster, summary, keynote, opinion piece, editorial (short paper) or it does not contain a significant amount of information. \label{Word:EC2} \\
+\item[\textbf{{EC}$_3$}]
+% [EC3 amedlabel{Word:EC3}{EC3}]
+The paper is a duplicate or a secondary study. \label{Word:EC3} \\
+
+\item[\textbf{{EC}$_4$}]
+% [EC4 amedlabel{Word:EC4}{EC4}] 
+The  paper  can be considered as grey  literature,  e.g., a blog post, an unpublished manuscript or a graduate  dissertation.\label{Word:EC4} \\
+\item[\textbf{{EC}$_5$}]
+% [EC5 amedlabel{Word:EC5}{EC5}] 
+The paper does not provide clear descriptions of methodologies used.\label{Word:EC5} \\
+\item[\textbf{{EC}$_6$}]
+% [EC6 amedlabel{Word:EC6}{EC6}]
+The paper deals with asset evolution without suggesting  appropriate metrics for predicting them. \label{Word:EC6} \\
+\item[\textbf{{EC}$_7$}]
+% [EC7 amedlabel{Word:EC7}{EC7}] 
+The paper does not satisfy IC1 or IC2. \label{Word:EC7} \\
+\item[\textbf{{EC}$_8$}]
+% [EC8 amedlabel{Word:EC8}{EC8}]
+The paper does not fulfill at least one of IC3, IC4, and IC5. \label{Word:EC8} \\
+
+\end{enumerate}
+
+\textbf{Quality Assessment}\label{S:qualityAssessment}
+
+To assess the quality of the studies included, we subsequently formulated a set of questions (or quality criteria):
+
+
+\begin{enumerate}
+    \item[\textbf{QA$_1$}] Does the study provide concrete examples of ML models and their performance? \label{Word:QA1}
+    \item[\textbf{QA$_2$}] Is the dataset used large enough? \label{Word:QA2}
+    \item[\textbf{QA$_3$}] Is the dataset from the financial domain? \label{Word:QA3}
+    \item[\textbf{QA$_4$}]  Does the study provide quantitative measurements of the metrics? \label{Word:QA4}
+    \item[\textbf{QA$_5$}]  Were the papers using state of the art NLP models and techniques and of relevance to financial data? \label{Word:QA5}
+\end{enumerate}
+
+
+
+We evaluated the quality of each article in the final reading journal by assigning a weight to each of the quality criteria listed above. Specifically, we assigned 1 if the paper fully satisfied the question, 0.5 if it partially satisfied the question, and 0 otherwise.
+
+Criteria for~\ref{Word:QA1} are the following:
+\begin{description}
+    \item[Fully matched] The study provides  2 or more examples of Machine learning models that outperform classical models in terms of performance
+    \item[Partially matched] The study includes not more than 2 examples of ML models that show slight/vast improvement over classical methods
+    \item[Not matched] The study contains only ML models that do not outperform classical methods using any metric of performance.
+\end{description}
+
+Criteria for~\ref{Word:QA2} are the following:
+\begin{description}
+    \item[Fully matched] The dataset used was large ($\>100000$) data points
+    \item[Partially matched] The dataset was small ($<10000$) data points 
+    \item[Not matched] No data is provided. 
+\end{description}
+
+Criteria for~\ref{Word:QA3} are the following:
+\begin{description}
+    \item[Fully matched] The dataset used was from the finance domain and a gold standard
+    \item[Partially matched] The dataset used was not from finance but was a gold standard and had some resemblance to financial data
+    \item[Not matched] The dataset used was not from fiance and no resemblance to financial data
+\end{description}
+
+Criteria for~\ref{Word:QA4} are as follows:
+\begin{description}
+    \item[Fully matched] The study used quantitative measurements 
+    \item[Not matched] No data is provided
+\end{description}
+
+Criteria for~\ref{Word:QA5} are the following:
+\begin{description}
+    \item[Fully matched] The paper uses state of the art NLP models and is of relevance to financial data
+    \item[Partially matched] The study with either uses NLP techniques or uses financial dataset but not both
+    \item[Not matched] The study does not use any financial dataset nor NLP techniques
+\end{description}
+
+Thus, the total score assigned to each paper could range from 0 to 5. The results of this quality assessment procedure can be found on ~\ref{T:qualityLevels}. This process of quality assessment was performed on the $205$ papers selected for inclusion in the reading log and it was instrumental to determine, evaluate, and further assess, as noted above, the overall quality of each of the papers we included in this study. As the tables below demonstrate, the vast majority of the papers included in our study were of high quality, as expected. Hence, we can infer that the results we gathered from their analysis are scientifically sound.
+
+However, the main goal of this Systematic Literature Review was not to simply evaluate the papers per se, rather, its aim was to collect and structure, in a meaningful way, information for future use.
+
+\begin{adjustwidth}{-2.5 cm}{-2.5 cm}\centering\begin{threeparttable}[!htb]
+
+\caption{Paper selection procedure}\label{tab:paperselection}
+\scriptsize
+\begin{tabular}{lrrrrrrrrrrrrr}\toprule
+Source &Initial Selection &\multicolumn{8}{c}{Removed papers} &\multicolumn{3}{c}{Selected Papers} \\\cmidrule{1-13}
+& &EC1 &EC2 &EC3 &EC4 &EC5 &EC6 &EC7 &EC8 &RQ1 &RQ2 &RQ3 \\\midrule
+MDPI &11 &0 &0 &0 &0 &0 &0 &0 &7 &4 &0 &0 \\
+Google Scholar &851,000 &305,000 &50 &200,000 &51,900 &10 &250,000 &3954 &40,000 &85 &1 &- \\
+SSRN &151 &0 &0 &25 &0 &0 &15 &100 &0 &10 &0 &- \\
+Scopus &179 &0 &0 &30 &0 &0 &31 &45 &70 &3 &0 &0 \\
+Science Direct &22,889 &0 &2 &80 &0 &800 &0 &10,000 &12000 &2 &5 &0 \\
+IEEE Xplore &147 &0 &0 &10 &0 &1 &0 &0 &0 &50 &86 &- \\
+Springer Link &83,829 &0 &0 &600 &424 &400 &2000 &400 &80,000 &5 &0 &0 \\
+ACM &2246 &0 &500 &79 &437 &219 &15 &400 &592 &0 &4 &- \\
+Arxiv &4 &0 &0 &0 &0 &0 &0 &0 &0 &0 &0 &0 \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}\end{adjustwidth}
+
+\begin{figure}
+    \tikzset{every picture/.style={scale=1.2\globalTikzScale}}
+    \input{tikz/prisma.tex}
+    \caption{\hl{Prisma Flow Chart Diagram}}
+    \label{F:prismaFlowDiagram}
+\end{figure}
+
+\begin{table}
+\caption{\hl{Papers' Ranking}}
+\label{T:qualityLevels}
+    \begin{tabularx}{\columnwidth}{X l r r}
+    \toprule
+    Quality Level & Score Range & Count & Percentage \\
+    \midrule
+    Poor & [0-1.5] & \hl{20} & \hl{9}\% \\
+    Good & [2-4] & \hl{100} & \hl{49}\% \\
+    % \st{43}
+    Excellent & [4.5-5] & 85 & \hl{42}\% \\
+    
+    \midrule
+    Total & --- & 205 & 100\% \\
+    % 58
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+We note that the vast majority of the papers we included in our final reading log ($\sim91\%$) were of good or excellent quality. Hence, we can infer that the data on which we based our SLR are scientifically sound. We also note that the hypen "-" in ~\Cref{tab:paperselection} indicates that they also satisfy that particular research question as well as the other one. For example, in Google Scholar, we note that 85 and 1 paper exclusively address RQ1 and RQ2 respectively, these papers collectively address RQ3 together. ~\Cref{F:prismaFlowDiagram} for Prisma template was obtained from \cite{succi2022}
+
+
+\section{Results} \label{S:results}
+
+This section summarises the results obtained from reading and extracting the data from the papers we included in the final reading log.
+
+\subsection{Preliminary Clustering} \label{S:preliminaryClustering}
+
+As noted above, we performed this SLR on some of the most popular and trusted databases available to researchers.
+
+We note that we attributed papers to single databases (even if some papers could be found across different databases), based on the chronological order of the searches performed. We also notice that two databases (Google Scholar and IEEE Explore) indexed the most (\hl{41} + \hl{41}\% $\sim$ \hl{82}\%) of the papers included in our reading log. Searches performed on MDPI and ACM rendered the least ($\sim$ \hl{1.9}\% each) number of relevant papers amounting to only of the total papers included in the log, while Arxiv accumulated zero number of papers.
+
+\begin{figure}
+   \resizebox{\columnwidth}{!}{
+    \input{tikz/databasedistribution.tex}
+    }
+    \caption{\hl{Distribution of studies by Database based on search queries}}
+    \label{F:databasedistribution}
+\end{figure}
+
+% This is to address, the fact, that we could have duplicates
+Thus, in~\Cref{F:databasedistribution} above and~\Cref{tab:paperselection} above, we only represented papers, which we attributed to a single repository. The attribution was subjective in character and yet followed the following rule. The paper was attributed to one database (e.g. Google Scholar) rather than to the other (e.g., Scopus) based on the chronological order of the searches we performed. We think that while this is perhaps not an ideal practice, it does not constitute a significant problem for this work. We thank the reviewer for pressing us on this important issue.
+
+%Also, presented below, is a distribution of publications , 
+\begin{table}
+\caption{\hl{Database Advantage and Limitations}}
+\label{T:databaseadvantageandlimitations}
+\begin{tabular}{ l  p{3.4cm}  p{3.4cm} }
+        \toprule
+\textbf{Database}      
+& \textbf{Advantages}   
+& \textbf{Limitations}   \\
+\midrule
+Google Scholar & This database is helpful in finding open access articles. It provides papers’ citations data, which is a useful indicator of an article’s popularity within a given scientific community. & Some papers (those not peer-reviewed) can be problematic, a few more are behind a paywall  \\
+% \st{43}
+Scopus,ScienceDirect and SSRN & Scientific databases with effective and precise search tools and analytic statistics &  Most of its journals as well as search features are behind paywall  \\
+ IEEE Xplore & Published papers are all peer-reviewed by leading experts in the field & Paywall  \\
+ SpringerLink & High Quality peer-reviewed papers, with reasonably priced access & Paywall  \\
+ MDPI & Peer-Reivewed and fast reviewd & Not as reputable as other journals \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+We also present  the geographical distribution of the studies we included in our log (based on first author's affiliation).~\Cref{F:countrydistribution} shows that the studies we selected have been published in at least 13 countries. The Other represents countries with publications less than or equal to 3, which includes Japan, Bangladesh, Greece, etc. This ensures a sufficient degree of cultural diversity for our reading log. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{figure}
+    \resizebox{\columnwidth}{!}{
+    \input{tikz/countrydistribution.tex}
+    }
+     \caption{\hl{Distribution of studies by country of origin, based on first author's affiliation}}
+    \label{F:countrydistribution}
+ \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \begin{figure}
+    \resizebox{\columnwidth}{!}{
+     \input{tikz/keywords.tex}
+     }
+     \caption{\hl{Distribution of keywords}}
+     \label{F:keywords}
+ \end{figure}
+
+
+We also display a distribution of publications by year from 1996-2022 ~\Cref{F:publicationbyyear}. We can clearly see a rise in use of machine learning methods in asset allocation/forecasting, including the use of NLP techniques. We have also presented the same data in,~\Cref{T:paperdistributionbyfiveyear} where for simplicity the distribution is shown over a period of 5-years.
+
+
+ \begin{figure}
+    \resizebox{\columnwidth}{!}{
+     \input{tikz/distributionpublicationbyyear.tex}
+     }
+     \caption{Distribution Of Studies By Year}
+     \label{F:publicationbyyear}
+ \end{figure}
+
+
+
+\begin{table}
+\caption{\hl{Paper Distribution Around 5-year Period}}
+\label{T:paperdistributionbyfiveyear}
+\begin{tabularx}{\columnwidth}{X r r}
+\toprule
+Year Range  & Count & Percentage \\
+\midrule
+1996-2004  & 4 & 1.9\% \\
+2005-2010  & 11 & 5.2\% \\
+% \st{43}
+2010-2015 & 20 & 9.6\% \\
+2016-2020 & 90 & 43.2\%\\
+2021-2022 & 80 & 38.4\%\\
+
+
+\midrule
+%Total & --- & 53 & 100\% \\
+% 58
+%\bottomrule
+\end{tabularx}
+\end{table}
+
+We also, visually display the distribution of Journals that contained collected papers in~\Cref{F:journalsdist}. Others include journals such as Journal of Econometrics, Hindawi, Financial Letters etc. All of which are $\le 3$.
+
+\begin{figure}
+   \resizebox{\columnwidth}{!}{
+    \input{tikz/journalsdistribution.tex}
+    }
+    \caption{\hl{Distribution of studies By Journals}}
+    \label{F:journalsdist}
+\end{figure}
+
+\subsection{Further Clustering}
+We present further clustering based on the following parameters a) Algorthims, b) Datasets, and c) Metrics.
+
+In addition, we also clustered the datasets used in the papers included in the final reading log. It is worth noting that a single dataset was found in multiple articles and use of certain algorithms were prevalent in many articles.~\Cref{T:algorithms} lists the algorithms used for training models and the statistics of their usage. We observed that LSTMs and SVMs were the most frequently mentioned algorithms. We concluded that it can probably be considered as the most widely used in the field.
+
+
+\begin{table}
+\caption{\hl{Algorithms Used}}
+\label{T:algorithms}
+\begin{tabularx}{\columnwidth}{X r r}
+\toprule
+Algorithm  & Count & Percentage \\
+\midrule
+SVM  & 43 & 20\% \\
+LSTM  & 43 & 20\% \\
+% \st{43}
+Naive Bayes & 22 & 10.5\% \\
+ARIMA & 17 & 8\%\\
+Random Forest & 12 & 5.7\% \\
+ANN & 11 & 5.2\%\\
+Linear Regression & 11 & 5.2\% \\
+kNN & 10 & 4.8\%\\
+Logistic Regression & 9 & 4.3\% \\
+RNN & 7 & 3.3\% \\
+CNN & 6 & 2.8\% \\
+Decision Trees & 6 & 2.8\% \\
+GRU & 6 & 2.8\% \\
+GAN & 3 & 1.4\% \\
+Others & 102 & 49\% \\
+
+
+\midrule
+%Total & --- & 53 & 100\% \\
+% 58
+%\bottomrule
+\end{tabularx}
+\end{table}
+
+
+"Other" Algorthims mentioned in~\Cref{T:algorithms} include k-Means Clustering, Transformer architectures, P-Trees, XGBoost etc. All of these algorithms used were less $\le 2$ in number. We also note a discrepancy in the number of algorithms used compared to total number of papers. This is due to the fact that some algorithms appeared in more than one papers, or used 2 or more algorithms in a pipeline as their solution. 
+
+Furthermore,~\Cref{T:metrics} below displays a list of metrics used for evaluating a model.
+
+\begin{table}
+\caption{\hl{Metrics Used}}
+\label{T:metrics}
+\begin{tabularx}{\columnwidth}{X r r}
+\toprule
+Metrics & Count & Percentage \\
+\midrule
+Accuracy & 60 & 28.8\% \\
+R-Squared  & 39 & 18.75\% \\
+% \st{43}
+RMSE & 32 & 15.3\% \\
+MSE & 15 & 7.2\%\\
+MAE & 15 & 7.2\% \\
+Precision & 15 & 7.2\%\\
+Recall & 14 & 6.7\% \\
+MAPE & 10 & 4.8\%\\
+F-Score & 8 & 4.3\% \\
+ROC-AUC & 4 & 1.9\% \\
+MCC & 3 & 1.4\% \\
+Correlation & 3 & 1.4\% \\
+Sharpe Ratio & 3 & 1.4\% \\
+Others & 18 & 8.6\% \\
+
+
+\midrule
+%Total & --- & 53 & 100\% \\
+% 58
+%\bottomrule
+\end{tabularx}
+\end{table}
+
+Others here include Average absolute difference rate, Beta Value, Weighted Recall etc. All of these metrics are of count $\le 2$
+
+Finally, we present in~\cref{T:datasetsused}, list of datasets used and also count for each.
+
+\begin{table}
+\caption{\hl{Datsets Used In Studies}}
+\label{T:datasetsused}
+\begin{tabularx}{\columnwidth}{X r r r}
+\toprule
+Dataset  & Count & Percentage \\
+\midrule
+Twitter & 25 & 12\% \\
+S\&P  & 21 & 10\% \\
+% \st{43}
+Yahoo Finance & 12 & 5.7\% \\
+NASDAQ & 11 & 5.2\%\\
+Reuters Website & 5 & 2.4\% \\
+NSE & 5 & 2.4\%\\
+NYSE & 5 & 2.4\% \\
+Google Trend Index & 4 & 1.9\%\\
+Others & 139 & 66.8\% \\
+
+\midrule
+%Total & --- & 53 & 100\% \\
+% 58
+%\bottomrule
+\end{tabularx}
+\end{table}
+
+The Others included datasets like Nifty, Shanghai Stock Exchange, etc. Others include datasets that are $\le 3$ in total frequency of papers.
+
+\section{Discussion} \label{S:discussion}
+
+\subsection{Datasets Used} \label{S:datasets used}
+
+Twitter, S\&P and Yahoo Finance are the most predominant datasets that are used by the researchers in our SLR as shown in ~\Cref{T:datasetsused}. The reason for this could be due to the fact that these are publicly available datasets, and are are typically huge in terms of number of sample points. 
+
+NASDAQ, Reuters constituted the remaining dominant datasets used by researchers. Twitter was the dominant source for Stock prediction using News articles. \cite{Dong2020,Bollen2011,Sharma2019}
+
+Some Articles used ML models for predicting sales performance using Blogs like in \cite{Liu2007}. Other articles, collected and built their own custom collection of stocks, but did not mention the source. \cite{Song2020}
+
+News sites, as well as encyclopedia entries, are commonly used for text classification tasks because they offer a broad set of topics and (or) an abundance of texts.
+
+
+\subsection{Stock Preprocessing/Text Preprocessing} \label{S:preprocessing}
+This section is devoted in commenting the on the preprocessing steps that were used before applying any Machine Learning models. 
+
+In terms of Stock pre-processing, some authors used predictor variables directly from publicly available datasets like S\&P 500 \cite{Feng2018}, while some drastically change their data representation, converting them into graph structures, that takes correlation of asset returns to build connectivity between assets \cite{son2022,Uddin2021}, while some converted the stocks into embeddings that are part of graph neural network pipelines \cite{Wu2019}. As found in \cite{Wu2019}, embeddings of stocks and news articles, returned best performance in terms of Sharpe Ratio and Profit\&Loss. \cite{Shynkevich2015} divided pre-processing into three steps: feature extraction, selection and representation. Author mentioned that the Bag-of-Words approach is used for feature extraction, and all articles are processed in the following way. Following that, words with capital letters are converted to lowercase, words with two or fewer characters are filtered out, and stop words are deleted. Finally, Porter's stemming algorithm is applied to each word in order to extract stems in order to treat different forms of the same word equally.
+
+\subsection{Algorithms} \label{S:algorithms}
+As observed from~\Cref{T:algorithms}, SVM is the most popular used algorithm in our collection of studies. SVM works well for linearly separable data, however, if data is non-linear, SVM will employ kernel tricks to project the data into higher dimension , and try to separate the data in that dimension. SVM however, does not perform well with noisy data set, and does not work well with large datasets, that are prevalent in the finance industry. 
+
+Other approaches for forecasting Stock prices, was Random Forest as shown in \cite{sadorsky2021}. A 20-day forecast horizon, tree bagging and random forests methods produce accuracy rates of between 85\% and 90\% while logit models produce accuracy rates of between 55\% and 60\%. Random Forests are highly interpretable, and according to this study, showed more promising results. 
+
+\cite{ENKE2005} was one of the first instance in our collection of using Neural networks(NN), as well as using General Regression Neural Networks(GRNN). They made an importatnt point that eventhough GRNN provides better performance measurement, they did not generate as much profit compared to the vanilla NN. The NN showed better prediction of signs on highly volatile periods, hence paramters should be trained to make robust predicitons where higher returns are available.
+
+The Other most popular algorthim that was used LSTM. The LSTM model was either used as  a standalone architecture \cite{Koudjonou2020, shen2021}, or it was used with combination of other models like CNN-BiLSTM as in \cite{wang2021stock} and combining traditional Time Series methods like ARIMA with LSTM \cite{hua2020}
+
+Other methodologies include Reinforcement Learning in stock trading using Deep Q networks\cite{dang2019}, as well as using and ensemble of Deep Q-learning agents as in \cite{carta2021}. Others used other policy optimization procedures like PPO, A2C as in \cite{Durall2022}
+
+Graph based approaches have also been in the rise, as it is seems natural to consider stocks as nodes of graphs as in \cite{son2022,Fazli2021}
+
+Explainable AI is one of the other factors that should taken into account when building a robust and interpretable Neural Network, as we are allocating clients' resources and financial assets. \cite{Golnoosh2022} uses Shapely values of their complex ML model, can contribute to the shift in Z-score of their portfolio. Shapely Values and LIME were also used in \cite{Jakubowski2022} for asset failure prediction. LIME and Shapely values are quite easy to understand but fail to scale for large feature space. Other researchers opted to integrate fuzzy logic into system as in \cite{chen2014, xie2021}
+
+Further other methodologies applied heuristic based optimization approaches like Genetic Algorthim \cite{thakkar2022information,CHEN2020}, fruitfly Optimization \cite{tian2020}
+
+\cite{Sharma2019} used in his work Generalized additive models (GAM). GAMs combine the concept of additive models with the standard generalized linear models. By estimating nonparametric functions of predictor variables that are connected to the dependent variable via some link function, generalized additive models aim to maximize prediction quality of a dependent variable from many distributions. The GAM model has the advantage of easily decomposing and incorporating new components, such as identifying and incorporating a new source of seasonality.
+
+Algorithms like AdaBoost and Naive Bayes were used in the article \cite{Haider2011}. To correctly identify the weights of the parameters, AdaBoost calls a weak classifier repeatedly in a series of rounds and The Naives Bayes classifier constructs the model using estimator classes. The precision values of numerical estimators are determined by analyzing the training data.
+
+To conclude, there are a number of ways and approaches to time series stock/ asset prediction/forecasting. Nowadays, NN based approaches can be considered a state-of-the-art approach being the one that is most widely used by researchers. The main advantage of NN is that in most of the cases it outperforms other approaches. Its major limitation is that it requires a lot of trials to succeed because none knows exactly, at the time of writing at least, the reason for this superior performance. This means that one needs to try a lot of different combinations of hyperparameters and different preprocessing techniques in order for the model to achieve optimal performance.
+
+
+\subsection{Quality Assessment Metrics}
+
+ Fortunately, most papers in our SLR, use accuracy in combination with other representative metrics. For example, F-1 Score, Recall and Precision was used with accuracy. F-1 score eliminates the main limitation of accuracy and leads to more precise and reliable results.
+
+ For asset prediction/forecasting, $R^2$ was used. It was used in \cite{Zhang2022, Chen2019, Uddin2020,son2022, Wu2019, Li2020, huang2021} and others. $R^2$ has a lot of issues, R-squared does not measure goodness of fit. It can be arbitrarily low when the model is completely correct, it can be arbitrarily close to 1 even if the model is completely wrong, to name a few. Thankfully, most of the researchers also compared it with other metrics like adjusted $R^2$. 
+
+Another important metric seen in quantitative financial literature, including our study, is Sharpe Ratio. It was used in \cite{son2022} for example. Sharpe ratio is simple formula , but it relies too much on standard deviation and treatment of volatility as the same.
+
+Most popular metrics among stock price time series prediction papers is Mean Squared Error (MSE), Mean Absolute Error (MAE) and Root Mean Square Error (RMSE). For example, all these metrics have been used in these articles: \cite{Dong2020}, \cite{Huan2020}, \cite{Guo2020}, \cite{Yu2019}, \cite{Yu2017} and \cite{Ray2021}.
+Mean Squared Error (MSE) and Root Mean Square Error (RMSE) penalize large prediction errors in comparison to Mean Absolute Error (MAE). However, because it uses the same units as the dependent variable, RMSE is more widely used than MSE to compare the performance of the regression model to other random models. In comparison to a non-differentiable function like MAE, MSE is a differentiable function that makes it easier to perform mathematical operations. As a result, despite being more difficult to interpret than MAE, RMSE is often used as the default metric for calculating Loss Function in many models.
+
+Based on the statistical analysis performed above, it seems reasonable and appropriate to summarize the information obtained and to conduct a critical review of our research questions, which is what we will do next.
+
+\section{Critical Review of Research Questions}
+
+\subsection{Analysis of RQ1}\label{S:analysisRQ1}
+From The papers collected, there is a strong representation of LSTMs being used for Time Series prediction. But as mention in \cite{Feng2018}, LSTMs seem to be overly optimistic and they predict less market crashes. A big problem with LSTMs is that they also require lots more training time, especially on large datasets, and tend to overfit due to their complex and expressive structure.
+
+\cite{Cong2022} applied an interpretable tree based method, called P-Tree to generate a stochastic discount factor model and test assets for cross-sectional asset pricing. Unlike other tree algorithms, P-Trees
+accommodate imbalanced panels of asset returns and grow under the no-arbitrage condition. The model is quite simple, requires little training time, and deals with non-linearity, with the added benefit of being highly interpretable. 
+
+\cite{son2022} establishes a graph based approach to asset pricing.To reflect the connectedness between asset returns for risk exposure estimation, they used a graph convolutional network (GCN), which takes into account the graph structure between firms, rather than a simple neural network. They also presented a way to construct a graph of firms that fits our goal, asset pricing, using the correlation of returns. Second, They proposed a forward stagewise modeling architecture that sequentially adds latent factors to inherit factors from the latent factor model of the previous step, such as an observable factor model or PCA-based latent factor model. The model achieved state of the art performance and beats every other benchmark model, the model also achieved the highest Sharpe ratio of the tangency factor portfolio.
+
+\subsection{Analysis of RQ2}\label{S:analysisRQ2}
+Most successful and applicable for stock price time series prediction models is LSTM and ARIMA.
+
+Social media content contains a wealth of important information about the stock. The stock financial index variables can only represent the development trend of the stock price, but investor sentiment can describe the potential trend of the stock price, which is usually overlooked in traditional prediction methods. \cite{Huan2020} used deep learning technology to extract text features that can represent investor sentiment and greatly improve prediction performance by using an LSTM-based model.
+
+As found in \cite{Mehta2021}, the ARIMA model performs best when forecasting short-term results, while the LSTM model performs better when forecasting long-term results. Because the user must run the model daily for each stock in the stock market, we need short term prediction to be more accurate. For this scenario, we do not need long term prediction to be more accurate, so the ARIMA model provides the best RMSE score.
+
+The information presented in the collected dataset is in raw form. To remove attribute bias in model development, the data should be cleaned for empty observations and scaled. Each neural network approach employed in \cite{AlAradi2020}, had a unique treatment and selection criterion as in other works.
+
+\subsection{Analysis of RQ3}\label{S:analysisRQ3}
+
+\cite{haq2021} described an accuracy amount of 59.44 for their STOCKNET + MFSS method, outperforming various methods in caparison, like RAND and ARIMA models.
+
+\cite{Li2020} displayed a supreme performance of neural based methods. Showing a result of 2.9($10^-5$) $R^2$ value, in comparison to statistical methods.
+
+\cite{qiu2020} displayed, an RNN based model, returned a MSE of 0.2592, displaying better peroformance. 
+
+ \cite{shen2021} used an LSTM network for effective multinational trade forecasting. It had smaller values of root mean square error (RMSE) and mean absolute percentage error (MAPE) than did time-series models and economic structural models. On the export forecast, RMSE improved by 17.048\%
+
+ As we can see, over the years, even on completely different datasets and data representation, Neural Network models, showed improved performance over the years.
+
+ \subsection{Synoptic Summary}
+~\Cref{T:synoptic summary} presents as summary of our results to our research questions tackled in our study.
+
+We identified two main approaches that are used for asset evolution. The first one being, the standard model of using Time Series stocks, and predict their prices in a given window as shown in \cite{dhafer2021}. The other being that they mine text/new articles as displayed in \cite{Gidfalvi2001UsingNA}, and \cite{dhafer2021}, which used BP Neural Networks based on public opinion. Typically for the second method, old ML methods like Naive Bayes are being used, or small parameter sized neural network models.
+
+From the methods mentioned in ~\Cref{S:algorithms}, we have identified a few promising approaches. One being mentioned in \cite{sarmah2022}, which uses Learnt embedded Representation of Stock Correlation Matrix. We can further extract textual information uses State of the Art Models like FinBert and further embed such information in our graph structure. 
+ 
+ \begin{table}
+\caption{\hl{Synoptic summary Of Our Results}}
+\label{T:synoptic summary}
+\begin{tabularx}{\columnwidth}{X p{6.0cm}}
+\toprule
+RQs & Summary \\
+\midrule
+RQ1 & A lot of methods are used in asset pricing/forecasting. The most dominant model is LSTM, followed by SVM, Random Forest, GRU, and other NN based approahces like attention Graph Neural Networks \\
+RQ2  &  Most popular models for time series stock price forecasting is Long short-term memory (LSTM) and Autoregressive integrated moving average (ARIMA). The ARIMA model performs best when forecasting short-term results, while the LSTM model performs better when forecasting long-term results. \\
+% \st{43}
+RQ3 & Researchers used a list of metrics, with $R^2$ and MSE being the most common for most regression/time series prediction tasks, and Accuracy being the most coming for classification  \\
+
+
+\midrule
+%Total & --- & 53 & 100\% \\
+% 58
+%\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Limitations, Threats to Validity and Review Assessment}\label{S:limitationsThreatsAssessment}
+
+The analysis of the potential weaknesses of a research work plays a fundamental role in encouraging readers to think more deeply about the topic  as well as in appreciating possible future research directions. In this section, we thus adopt a critical stance on our findings. More specifically, we reflect on a few issues that may have influenced the objectivity, transparency, reproducibility, and academic soundness of our research.  
+
+\subsection{Limitations}\label{S:limitations}
+We start by analyzing circumstances and conditions that may limit the relevance and significance of our work. In this context, we might consider two aspects as potentially detrimental to our research:
+
+First, one may see as problematic the fact that we searched only six databases. However, we note that the databases we searched are the most frequently used by researchers in computer science. In addition, one of such databases (Google Scholar) aggregates most of the contents available on other indexes. Thus, it is safe to assume that despite being run on a limited number of databases, our searches were quite comprehensive (more on this in~\cref{S:threats} below)
+    % \item The second potential limitation on our work is that we 
+Second, one may object that one of our inclusion criteria (English requirement) limited our research capability. Cross-cultural issues have become especially important in modern science . We are aware of these issues and recognize them as vitally important for a fair characterisation of scientific findings. However, given that most publications on the topic are written in English, and since leading journals in the field only accept submission in this language, we believe the restriction we adopted is neither unusual nor unjustified. In any case, the geographical distribution of our studies (Figure 3) demonstrates that there is sufficient cultural variability among the studies we included in our reading log.
+
+\subsection{Threats to Validity}\label{S:threats}
+
+Next, we address a series of possible biases that could cast doubt on the legitimacy or general validity of our work.. These are:
+\begin{paraenum}
+\item retrieval bias,
+\item selector bias,
+\item expectation bias, and
+\item within-study bias..
+\end{paraenum}
+
+\textbf{Retrieval bias:} may occur when the articles selected for inclusion are inadequate or when the searches performed by the authors are partial or incomplete. To avoid this bias, we conducted comprehensive searches on several different databases (six) and did not put any restriction on year of publication. In addition, we only selected high-quality articles, as shown in subsection analysis above~\cref{S:qualityAssessment} and obviously included only works that matched our research topic.
+
+\textbf{Selector bias:} occurs when the studies selected for inclusion in the reading log are affected by the authors' previous knowledge of the topic. In brief, when the findings are collected subjectively. To avoid the occurrence of this bias, we performed all the searches collaboratively. In other words, each member of the team was directly involved in them. In addition, to safeguard objectivity, team members were also asked to cross-check the activities of other members. 
+
+\textbf{Expectation bias:} can be considered as an extension of the \emph{Selector bias} and typically occurs when data extraction and synthesis is severely constrained by the authors' conscious or unconscious expectations about the results. Our research team consists of academics, students, and industry practitioners. Furthermore, it comprises specialists in machine learning, engineers, and AI scientists, thus it draws from various backgrounds and relies on multiple scientific approaches. Given the multidisciplinary character of our research team and its interdisciplinary stance, we believe we managed to reduce the occurrence of this bias to the minimum.
+
+\textbf{Within-study bias:} develops as a result of a deficiency of data extraction templates. For this purpose, we designed a data extraction template (on Google sheet) and each team member actively participated in filling it.
+
+
+\section{Conclusion}\label{S:conclusion}
+The aim of this Systematic Literature Review was to investigate the usage of Machine Learning in Asset Evolution/Forecasting. This study attempted to answer the following research questions \textbf{RQ1}: What are the most effective ML models to predict evolution of an asset in the financial market? \textbf{RQ2}: What the existing approaches for forecasting stock price trend based on news/tweets or textual data? and \textbf{RQ3}: How accurately can machine learning models predict the stock price?
+
+With regards to \textbf{RQ1}, we found a high representation of studies using LSTMs either as base models or standalone models, and showed to be highly effective. Concerning \textbf{RQ2}, we found LSTM and SVMs dominate the modelling part, which is usually preceded by embeddings. With respect to \textbf{RQ3}, we can state that effectiveness in identification is dependent on the data and on the algorithms used. \cite{shen2021} showed a RMSE improvement of 17.048\%, \cite{qiu2020} returned an MSE of 0.2592.
+
+Our results may also suggest that stock price prediction could be heavily improved using textual data and the appropriate embeddings. In any case, further work is to corroborate any of these speculations.
+We nevertheless hope that this systematic literature review will broaden interest in using hybrid sources for financial asset evolution using Machine Learning and will provide new grounds for more detailed explorations into these extraordinarily rich and fascinating set of phenomena.\citep{Campbell:03}
+
+%\bibliography{RHSbib}
+\newcommand{\nocom}[1]{}
+\nocom{
+% \begin{thebibliography}{}
+% \bibitem[Zhu(2021)]{Zhu:2021}Zhu, L., Wu, H. \& Wells, M. A News-based Machine Learning Model for Adaptive Asset Pricing. (arXiv,2021), https://arxiv.org/abs/2106.07103 
+% \bibitem[Zhang(2022)]{Zhang2022}Zhang, C. Asset Pricing and Deep Learning. (arXiv,2022), https://arxiv.org/abs/2209.12014 
+% \bibitem[Feng(2018)]{Feng2018}Feng, G., He, J. \& Polson, N. Deep Learning for Predicting Asset Returns. (arXiv,2018) 
+% \bibitem[Shihao(2021)]{Shihao2021}Gu, S., Kelly, B. \& Xiu, D. Autoencoder asset pricing models. {\em Journal Of Econometrics}. \textbf{222}, 429-450 (2021), Annals Issue:Financial Econometrics in the Age of the Digital Economy 
+% \bibitem[chen(2020)]{chen2020}Chen, L., Pelger, M. \& Zhu, J. Internet appendix for deep learning in asset pricing. {\em Available At SSRN 3600206}. (2020) 
+% \bibitem[son(2022)]{son2022}Son, B. \& Lee, J. Graph-based multi-factor asset pricing model. {\em Finance Research Letters}. \textbf{44} pp. 102032 (2022) 
+% \bibitem[Ferrer(2022)]{Ferrer2022}Mirete-Ferrer, P., Garcia-Garcia, A., Baixauli-Soler, J. \& Prats, M. A Review on Machine Learning for Asset Management. {\em Risks}. \textbf{10} (2022), https://www.mdpi.com/2227-9091/10/4/84 
+% \bibitem[Chen(2019)]{Chen2019}Chen, L., Pelger, M. \& Zhu, J. Deep Learning in Asset Pricing. (arXiv,2019)
+% \bibitem[Islam(2022)]{Islam2022}Islam, T. \& Jabiullah, M. Empirical Asset Pricing via Deep Learning Algorithms. {\em Smart Data Intelligence}. pp. 109-119 (2022) 
+% \bibitem[itkin(2019)]{itkin2019}Itkin, A. Deep learning calibration of option pricing models: some pitfalls and solutions. (arXiv,2019), https://arxiv.org/abs/1906.03507  
+% \bibitem[Uddin(2020)]{Uddin2020}Uddin, A. \& Yu, D. Latent factor model for asset pricing. {\em Journal Of Behavioral And Experimental Finance}. \textbf{27} pp. 100353 (2020) 
+% \bibitem[Uddin(2021)]{Uddin2021}Uddin, A., Tao, X. \& Yu, D. Attention Based Dynamic Graph Learning Framework for Asset Pricing. {\em Proceedings Of The 30th ACM International Conference On Information \& Knowledge Management}. pp. 1844-1853 (2021), https://doi.org/10.1145/3459637.3482413 
+% \bibitem[Cong(2022)]{Cong2022}Cong, L., Feng, G., He, J. \& He, X. Asset pricing with panel tree under global split criteria. {\em Available At SSRN 3949463}. (2022) 
+% \bibitem[Liu(2020)]{Liu2020}Liu, Y. \& Zhang, L. Cryptocurrency Valuation and Machine Learning. {\em SSRN Electronic Journal}. (2020), https://doi.org/10.2139\%5C\%252Fssrn.3657986 
+% \bibitem[Golnoosh(2022)]{Golnoosh2022}Babaei, G., Giudici, P. \& Raffinetti, E. Explainable artificial intelligence for crypto asset allocation. {\em Finance Research Letters}. \textbf{47} pp. 102941 (2022) \bibitem[Jakubowski(2022)]{Jakubowski2022}Jakubowski, J., Stanisz, P., Bobek, S. \& Nalepa, G. Performance of Explainable AI Methods in Asset Failure Prediction. {\em Computational Science – ICCS 2022}. pp. 472-485 (2022) 
+% \bibitem[Durall(2022)]{Durall2022}Durall, R. Asset Allocation: From Markowitz to Deep Reinforcement Learning. (arXiv,2022) 
+% \bibitem[Zihao(2020]){Zihao2020}Zhang, Z., Zohren, S. \& Roberts, S. Deep Learning for Portfolio Optimization. {\em The Journal Of Financial Data Science}. \textbf{2}, 8-20 (2020) 
+% \bibitem[Qiong(2019)]{Qiong2019}Wu, Q., Zhang, Z., Pizzoferrato, A., Cucuringu, M. \& Liu, Z. A Deep Learning Framework for Pricing Financial Instruments. {\em CoRR}. (2019) 
+% \bibitem[Fang(2021)]{Fang2021}Fang, M. \& Taylor, S. A machine learning based asset pricing factor model comparison on anomaly portfolios. {\em Economics Letters}. \textbf{204} pp. 109919 (2021) \bibitem[Sonksen(2022)]{Sonksen2022}Sönksen, J. Machine Learning for Asset Pricing. {\em Econometrics With Machine Learning }. pp. 337-366 (2022) 
+% \bibitem[Petrozziello(2022)]{Petrozziello2022}Petrozziello, A., Troiano, L., Serra, A., Jordanov, I., Storti, G., Tagliaferri, R. \& La Rocca, M. Deep learning for volatility forecasting in asset management. {\em Soft Computing}. \textbf{26}, 8553-8574 (2022) 
+% \bibitem[Fan(2022)]{Fan2022}Fan, H. The digital asset value and currency supervision under deep learning and blockchain technology. {\em Journal Of Computational And Applied Mathematics}. \textbf{407} pp. 114061 (2022) 
+% \bibitem[Koudjonou(2020)]{Koudjonou2020}Koudjonou, K. \& Rout, M. A stateless deep learning framework to predict net asset value. {\em Neural Computing And Applications}. \textbf{32}, 1-19 (2020) 
+% \bibitem[Li(2020)]{Li2020}Li, W. \& Mei, F. Asset returns in deep learning methods: An empirical analysis on SSE 50 and CSI 300. {\em Research In International Business And Finance}. \textbf{54} pp. 101291 (2020) 
+% \bibitem[Rodseth(2019)]{Rodseth2019}Rødseth, H., Eleftheriadis, R., Li, Z. \& Li, J. Smart Maintenance in Asset Management–Application with Deep Learning. {\em International Workshop Of Advanced Manufacturing And Automation}. pp. 608-615 (2019) 
+% \bibitem[henrique(2019)]{henrique2019}Henrique, B., Sobreiro, V. \& Kimura, H. Literature review: Machine learning techniques applied to financial market prediction. {\em Expert Systems With Applications}. \textbf{124} pp. 226-251 (2019) 
+% \bibitem[thakkar(2021)]{thakkar2021}Thakkar, A. \& Chaudhari, K. A comprehensive survey on deep neural networks for stock market: The need, challenges, and future directions. {\em Expert Systems With Applications}. \textbf{177} pp. 114800 (2021) 
+% \bibitem[barra(2020)]{barra2020}Barra, S., Carta, S., Corriga, A., Podda, A. \& Recupero, D. Deep learning and time series-to-image encoding for financial forecasting. {\em IEEE/CAA Journal Of Automatica Sinica}. \textbf{7}, 683-692 (2020) 
+% \bibitem[yun(2021)]{yun2021}Yun, K., Yoon, S. \& Won, D. Prediction of stock price direction using a hybrid GA-XGBoost algorithm with a three-stage feature engineering process. {\em Expert Systems With Applications}. \textbf{186} pp. 115716 (2021) 
+% \bibitem[haq(2021)]{haq2021}Haq, A., Zeb, A., Lei, Z. \& Zhang, D. Forecasting daily stock trend using multi-filter feature selection and deep learning. {\em Expert Systems With Applications}. \textbf{168} pp. 114444 (2021) 
+% \bibitem[huang(2021)]{huang2021}Huang, Y., Gao, Y., Gan, Y. \& Ye, M. A new financial data forecasting model using genetic algorithm and long short-term memory network. {\em Neurocomputing}. \textbf{425} pp. 207-218 (2021) 
+% \bibitem[ARMANO(2005)]{ARMANO2005}Armano, G., Marchesi, M. \& Murru, A. A hybrid genetic-neural architecture for stock indexes forecasting. {\em Information Sciences}. \textbf{170}, 3-33 (2005), https://www.sciencedirect.com/science/article/pii/S002002550300433X, Computational Intelligence in Economics and Finance 
+% \bibitem[BARAK(2017)]{BARAK2017}Barak, S., Arjmand, A. \& Ortobelli, S. Fusion of multiple diverse predictors in stock market. {\em Information Fusion}. \textbf{36} pp. 90-102 (2017), https://www.sciencedirect.com/science/article/pii/S1566253516301294 
+% \bibitem[CHANG(2009)]{CHANG2009}Chang, P., Liu, C., Lin, J., Fan, C. \& Ng, C. A neural network with a case based dynamic window for stock trading prediction. {\em Expert Systems With Applications}. \textbf{36}, 6889-6898 (2009), https://www.sciencedirect.com/science/article/pii/S0957417408006209  
+% \bibitem[chen(2014)]{chen2014}Chen, Y., Cheng, C. \& Tsai, W. Modeling fitting-function-based fuzzy time series patterns for evolving stock index forecasting. {\em Applied Intelligence}. \textbf{41}, 327-347 (2014)  
+% \bibitem[ENKE(2005)]{ENKE2005}Enke, D. \& Thawornwong, S. The use of data mining and neural networks for forecasting stock market returns. {\em Expert Systems With Applications}. \textbf{29}, 927-940 (2005), https://www.sciencedirect.com/science/article/pii/S0957417405001156 
+% \bibitem[GOCKEN(2016)]{GOCKEN2016}Göçken, M., Özçalıcı, M., Boru, A. \& Dosdoğru, A. Integrating metaheuristics and Artificial Neural Networks for improved stock price prediction. {\em Expert Systems With Applications}. \textbf{44} pp. 320-331 (2016), https://www.sciencedirect.com/science/article/pii/S0957417415006570 
+% \bibitem[CHEN(2020)]{CHEN2020}Chen, B., Zhong, J. \& Chen, Y. A hybrid approach for portfolio selection with higher-order moments: Empirical evidence from Shanghai Stock Exchange. {\em Expert Systems With Applications}. \textbf{145} pp. 113104 (2020), https://www.sciencedirect.com/science/article/pii/S0957417419308218 
+% \bibitem[HE(2021)]{HE2021}He, H., Gao, S., Jin, T., Sato, S. \& Zhang, X. A seasonal-trend decomposition-based dendritic neuron model for financial time series prediction. {\em Applied Soft Computing}. \textbf{108} pp. 107488 (2021), https://www.sciencedirect.com/science/article/pii/S1568494621004117 
+% \bibitem[CHEN(2016)]{CHEN2016}Tai-Chen \& Feng-Chen An intelligent pattern recognition model for supporting investment decisions in stock market. {\em Information Sciences}. \textbf{346-347} pp. 261-274 (2016), https://www.sciencedirect.com/science/article/pii/S0020025516300159  
+% \bibitem[HUANG(2009)]{HUANG2009}Huang, C. \& Tsai, C. A hybrid SOFM-SVR with a filter-based feature selection for stock market forecasting. {\em Expert Systems With Applications}. \textbf{36}, 1529-1539 (2009), https://www.sciencedirect.com/science/article/pii/S0957417407006069  
+% \bibitem[ISMAIL(2020)]{ISMAIL2020}Ismail, M., Noorani, M., Ismail, M., Razak, F. \& Alias, M. Predicting next day direction of stock price movement using machine learning methods with persistent homology: Evidence from Kuala Lumpur Stock Exchange. {\em Applied Soft Computing}. \textbf{93} pp. 106422 (2020), https://www.sciencedirect.com/science/article/pii/S1568494620303628   
+% \bibitem[KARACA(2020)]{KARACA2020}Karaca, Y., Zhang, Y. \& Muhammad, K. Characterizing Complexity and Self-Similarity Based on Fractal and Entropy Analyses for Stock Market Forecast Modelling. {\em Expert Systems With Applications}. \textbf{144} pp. 113098 (2020), https://www.sciencedirect.com/science/article/pii/S0957417419308152 
+% \bibitem[qiu(2020)]{qiu2020}Qiu, Y., Yang, H., Lu, S. \& Chen, W. A novel hybrid model based on recurrent neural networks for stock market timing. {\em Soft Computing}. \textbf{24}, 15273-15290 (2020) 
+% \bibitem[dash(2020)]{dash2020}Dash, R. Performance analysis of an evolutionary recurrent Legendre Polynomial Neural Network in application to FOREX prediction. {\em Journal Of King Saud University-Computer And Information Sciences}. \textbf{32}, 1000-1011 (2020) 
+% \bibitem[sadorsky(2021)]{sadorsky2021}Sadorsky, P. A Random Forests Approach to Predicting Clean Energy Stock Prices. {\em Journal Of Risk And Financial Management}. \textbf{14} (2021), https://www.mdpi.com/1911-8074/14/2/48 
+% \bibitem[shen(2021)]{shen2021}Shen, M., Lee, C., Liu, H., Chang, P. \& Yang, C. Effective multinational trade forecasting using LSTM recurrent neural network. {\em Expert Systems With Applications}. \textbf{182} pp. 115199 (2021) 
+% \bibitem[islam(2020)]{islam2020}Islam, M., Hossain, E., Rahman, A., Hossain, M. \& Andersson, K. A review on recent advancements in forex currency prediction. {\em Algorithms}. \textbf{13}, 186 (2020) 
+% \bibitem[khedmati(2020)]{khedmati2020}Khedmati, M. \& Azin, P. An online portfolio selection algorithm using clustering approaches and considering transaction costs. {\em Expert Systems With Applications}. \textbf{159} pp. 113546 (2020) 
+% \bibitem[thakkar(2020)]{thakkar2020}Thakkar, A. \& Chaudhari, K. CREST: cross-reference to exchange-based stock trend prediction using long short-term memory. {\em Procedia Computer Science}. \textbf{167} pp. 616-625 (2020) 
+% \bibitem[senhora(2022)]{senhora2022}Senhora, F., Chi, H., Zhang, Y., Mirabella, L., Tang, T. \& Paulino, G. Machine learning for topology optimization: Physics-based learning through an independent training strategy. {\em Computer Methods In Applied Mechanics And Engineering}. \textbf{398} pp. 115116 (2022)   
+% \bibitem[tian(2020)]{tian2020}Tian, Z. Echo state network based on improved fruit fly optimization algorithm for chaotic time series prediction. {\em Journal Of Ambient Intelligence And Humanized Computing}. pp. 1-20 (2020) 
+% \bibitem[koutlis(2020)]{koutlis2020}Koutlis, C., Papadopoulos, S., Schinas, M. \& Kompatsiaris, I. LAVARNET: Neural network modeling of causal variable relationships for multivariate time series forecasting. {\em Applied Soft Computing}. \textbf{96} pp. 106685 (2020) 
+% \bibitem[wu(2022)]{wu2022}Wu, D., Wang, X. \& Wu, S. Jointly modeling transfer learning of industrial chain information and deep learning for stock prediction. {\em Expert Systems With Applications}. \textbf{191} pp. 116257 (2022) 
+% \bibitem[sadeghi(2021)]{sadeghi2021}Sadeghi, A., Daneshvar, A. \& Zaj, M. Combined ensemble multi-class SVM and fuzzy NSGA-II for trend forecasting and trading in Forex markets. {\em Expert Systems With Applications}. \textbf{185} pp. 115566 (2021) 
+% \bibitem[carta(2021)]{carta2021}Carta, S., Consoli, S., Podda, A., Recupero, D. \& Stanciu, M. Ensembling and dynamic asset selection for risk-controlled statistical arbitrage. {\em IEEE Access}. \textbf{9} pp. 29942-29959 (2021) 
+% \bibitem[zhang(2021)]{zhang2021}Zhang, W., Gong, X., Wang, C. \& Ye, X. Predicting stock market volatility based on textual sentiment: A nonlinear analysis. {\em Journal Of Forecasting}. \textbf{40}, 1479-1500 (2021)   
+% \bibitem[huang(2020)]{huang2020novel}Huang, S., Chiou, C., Chiang, J. \& Wu, C. A novel intelligent option price forecasting and trading system by multiple kernel adaptive filters. {\em Journal Of Computational And Applied Mathematics}. \textbf{369} pp. 112560 (2020) 
+% \bibitem[kim(2021)]{kim2021}Kim, J., Kim, D. \& Jung, H. Applications of machine learning for corporate bond yield spread forecasting. {\em The North American Journal Of Economics And Finance}. \textbf{58} pp. 101540 (2021) 
+% \bibitem[dang(2019)]{dang2019}Dang, Q. Reinforcement learning in stock trading. {\em International Conference On Computer Science, Applied Mathematics And Applications}. pp. 311-322 (2019) 
+% \bibitem[xie(2021)]{xie2021}Xie, C., Rajan, D. \& Chai, Q. An interpretable Neural Fuzzy Hammerstein-Wiener network for stock price prediction. {\em Information Sciences}. \textbf{577} pp. 324-335 (2021) 
+% \bibitem[lin(2021)]{lin2021}Lin, Y., Liu, S., Yang, H. \& Wu, H. Stock Trend Prediction Using Candlestick Charting and Ensemble Machine Learning Techniques With a Novelty Feature Engineering Scheme. {\em IEEE Access}. \textbf{9} pp. 101433-101446 (2021) 
+% \bibitem[akyildirim(2021)]{akyildirim2021}Akyildirim, E., Nguyen, D., Sensoy, A. \& Šikić, M. Forecasting high-frequency excess stock returns via data analytics and machine learning. {\em European Financial Management}. (2021) 
+% \bibitem[saha(2022)]{saha2022}Saha, S., Gao, J. \& Gerlach, R. A survey of the application of graph-based approaches in stock market analysis and prediction. {\em International Journal Of Data Science And Analytics}. pp. 1-15 (2022) 
+% \bibitem[hua(2020)]{hua2020}Hua, Y. Bitcoin price prediction using ARIMA and LSTM. {\em E3S Web Of Conferences}. \textbf{218} pp. 01050 (2020) 
+% \bibitem[mustapa(2019)]{mustapa2019}Mustapa, F. \& Ismail, M. Modelling and forecasting S\&P 500 stock prices using hybrid Arima-Garch Model. {\em Journal Of Physics: Conference Series}. \textbf{1366}, 012130 (2019) 
+% \bibitem[wang(2021)]{wang2021stock}Wang, H., Wang, J., Cao, L., Li, Y., Sun, Q. \& Wang, J. A stock closing price prediction model based on cnn-bislstm. {\em Complexity}. \textbf{2021} (2021) 
+% \bibitem[zhang(2022)]{zhang2022predicting}Zhang, M., Yang, J., Wan, M., Zhang, X. \& Zhou, J. Predicting long-term stock movements with fused textual features of Chinese research reports. {\em Expert Systems With Applications}. \textbf{210} pp. 118312 (2022) 
+% \bibitem[thakkar(2022)]{thakkar2022information}Thakkar, A. \& Chaudhari, K. Information fusion-based genetic algorithm with long short-term memory for stock price and trend prediction. {\em Applied Soft Computing}. \textbf{128} pp. 109428 (2022) 
+% \bibitem[sharma(2022)]{sharma2022integration}Sharma, D., Hota, H., Brown, K. \& Handa, R. Integration of genetic algorithm with artificial neural network for stock market forecasting. {\em International Journal Of System Assurance Engineering And Management}. \textbf{13}, 828-841 (2022) 
+% \bibitem[li(2022)]{li2022time}Li, H., Jia, R. \& Wan, X. Time series classification based on complex network. {\em Expert Systems With Applications}. \textbf{194} pp. 116502 (2022) 
+% \bibitem[orte(2022)]{orte2022random}Orte, F., McWilliams, J., Sánchez, M. \& Solana, P. A Random Forest-based model for crypto asset forecasts in futures markets with out-of-sample prediction. (Elsevier,2022) 
+% \bibitem[manujakshi(2022)]{manujakshi2022hybrid}Manujakshi, B., Kabadi, M. \& Naik, N. A Hybrid Stock Price Prediction Model Based on PRE and Deep Neural Network. {\em Data}. \textbf{7}, 51 (2022) 
+% \bibitem[gumus(2021)]{gumus2021stock}GUMUS, A. \& SAKAR, C. Stock market prediction by combining stock price information and sentiment analysis. {\em International Journal Of Advances In Engineering And Pure Sciences}. \textbf{33}, 18-27 (2021) 
+% \bibitem[herrmann(2022)]{herrmann2022}Herrmann, H. \& Masawi, B. Three and a half decades of artificial intelligence in banking, financial services, and insurance: A systematic evolutionary review. {\em Strategic Change}. (2022) 
+% \bibitem[rubesam(2022)]{rubesam2022}Rubesam, A. Machine learning portfolios with equal risk contributions: Evidence from the Brazilian market. {\em Emerging Markets Review}. \textbf{51} pp. 100891 (2022) 
+% \bibitem[saha(2021)]{saha2021stock}Saha, S., Gao, J. \& Gerlach, R. Stock ranking prediction using list-wise approach and node embedding technique. {\em IEEE Access}. \textbf{9} pp. 88981-88996 (2021) 
+% \bibitem[peykani(2022)]{peykani2022}Peykani, P., Seyed Esmaeili, F., Mirmozaffari, M., Jabbarzadeh, A. \& Khamechian, M. Input/output variables selection in data envelopment analysis: A shannon entropy approach. {\em Machine Learning And Knowledge Extraction}. \textbf{4}, 688-699 (2022)
+% \bibitem[parida(2021)]{parida2021}Parida, N., Mishra, D., Das, K., Rout, N. \& Panda, G. On deep ensemble CNN–SAE based novel agro-market price forecasting. {\em Evolutionary Intelligence}. \textbf{14}, 851-862 (2021) 
+% \bibitem[hajirahimi(2022)]{hajirahimi2022}Hajirahimi, Z. \& Khashei, M. Hybridization of hybrid structures for time series forecasting: a review. {\em Artificial Intelligence Review}. pp. 1-61 (2022)   
+% \bibitem[kamaladdin(2021)]{kamaladdin2021}Fataliyev, K., Chivukula, A., Prasad, M. \& Liu, W. Stock Market Analysis with Text Data: A Review. (arXiv,2021) 
+% \bibitem[zeng(2022)]{zeng2022hybrid}Zeng, X., Cai, J., Liang, C. \& Yuan, C. A hybrid model integrating long short-term memory with adaptive genetic algorithm based on individual ranking for stock index prediction. {\em Plos One}. \textbf{17}, e0272637 (2022) 
+% \bibitem[alsulmi(2022)]{alsulmi2022}Alsulmi, M. From Ranking Search Results to Managing Investment Portfolios: Exploring Rank-Based Approaches for Portfolio Stock Selection. {\em Electronics}. \textbf{11}, 4019 (2022) 
+% \bibitem[sarmah(2022)]{sarmah2022}Sarmah, B., Nair, N., Mehta, D. \& Pasquali, S. Learning Embedded Representation of the Stock Correlation Matrix using Graph Machine Learning. {\em ArXiv Preprint ArXiv:2207.07183}. (2022) 
+% \bibitem[jomthanachai(2022)]{jomthanachai2022}Jomthanachai, S., Wong, W. \& Khaw, K. An application of machine learning regression to feature selection: a study of logistics performance and economic attribute. {\em Neural Computing And Applications}. pp. 1-25 (2022) 
+% \bibitem[padhi(2022)]{padhi2022}Padhi, D., Padhy, N., Bhoi, A., Shafi, J. \& Yesuf, S. An Intelligent Fusion Model with Portfolio Selection and Machine Learning for Stock Market Prediction. {\em Computational Intelligence And Neuroscience}. \textbf{2022} (2022) 
+% \bibitem[liu(2022)]{liu2022}Liu, T. \& Yu, Z. The analysis of financial market risk based on machine learning and particle swarm optimization algorithm. {\em EURASIP Journal On Wireless Communications And Networking}. \textbf{2022}, 1-17 (2022) 
+% \bibitem[pinelis(2022)]{pinelis2022}Pinelis, M. \& Ruppert, D. Machine learning portfolio allocation. {\em The Journal Of Finance And Data Science}. \textbf{8} pp. 35-54 (2022) 
+% \bibitem[dhafer(2021)]{dhafer2021}Dhafer, A., Nor, F., Hashim, W., Shah, N., Khairi, K. \& Alkawsi, G. A NARX neural network model to predict one-day ahead movement of the stock market index of Malaysia. {\em 2021 2nd International Conference On Artificial Intelligence And Data Sciences (AiDAS)}. pp. 1-7 (2021) 
+% \bibitem[lima(2021)]{lima2021}Lima Paiva, F., Felizardo, L., Bianchi, R. \& Costa, A. Intelligent trading systems: a sentiment-aware reinforcement learning approach. {\em Proceedings Of The Second ACM International Conference On AI In Finance}. pp. 1-9 (2021) 
+% \bibitem[lopez(2022)]{lopez2022}Lopez-Pujalte, C., Tena-Mateos, M. \& Muñoz-Cañavate, A. A Technology Watch/Competitive Intelligence–based Decision-Support System optimised with Genetic Algorithms. {\em Journal Of Information Science}. (2022) 
+% \bibitem[cuomo(2022)]{cuomo2022}Cuomo, S., Gatta, F., Giampaolo, F., Iorio, C. \& Piccialli, F. An unsupervised learning framework for marketneutral portfolio. {\em Expert Systems With Applications}. \textbf{192} (2022) 
+% \bibitem[consoli(2022)]{consoli2022}Consoli, S., Pezzoli, L. \& Tosetti, E. Neural forecasting of the Italian sovereign bond market with economic news. {\em ArXiv Preprint ArXiv:2203.07071}. (2022) 
+% \bibitem[guo(2022)]{guo2022}Guo, Y. \& Chen, X. Forecasting the Mid-price Movements with High-Frequency LOB: A Dual-Stage Temporal Attention-Based Deep Learning Architecture. {\em Arabian Journal For Science And Engineering}. pp. 1-22 (2022) 
+% \bibitem[felizardo(2022)]{felizardo2022}Felizardo, L., Paiva, F., Costa, A. \& Del-Moral-Hernandez, E. Reinforcement Learning Applied to Trading Systems: A Survey. {\em ArXiv Preprint ArXiv:2212.06064}. (2022) 
+% \bibitem[carta(2020)]{carta2020}Carta, S., Recupero, D., Saia, R. \& Stanciu, M. A general approach for risk controlled trading based on machine learning and statistical arbitrage. {\em International Conference On Machine Learning, Optimization, And Data Science}. pp. 489-503 (2020) 
+% \bibitem[broby(2022)]{broby2022}Broby, D. The use of predictive analytics in finance. {\em The Journal Of Finance And Data Science}. (2022) 
+% \bibitem[li(2022)]{li2022}Li, C. \& Liu, K. Path signature-based phase space reconstruction for stock trend prediction. {\em International Journal Of Data Science And Analytics}. pp. 1-12 (2022) 
+% \bibitem[zolotareva(2021)]{zolotareva2021}Zolotareva, E. Applying Convolutional Neural Networks for Stock Market Trends Identification. {\em International Conference On Artificial Intelligence And Soft Computing}. pp. 269-282 (2021) 
+% \bibitem[wang(2022)]{wang2022digital}Wang, L., Zhao, L. \& Others Digital Economy Meets Artificial Intelligence: Forecasting Economic Conditions Based on Big Data Analytics. {\em Mobile Information Systems}. \textbf{2022} (2022) 
+% \bibitem[Fazli(2021)]{Fazli2021}Fazli, M., Alian, P., Owfi, A. \& Loghmani, E. RPS: Portfolio Asset Selection using Graph based Representation Learning. (arXiv,2021), https://arxiv.org/abs/2111.15634 
+% \bibitem[riabykh(2022)]{riabykh2022sttm}Riabykh, A., Surzhko, D., Konovalikhin, M. \& Koltcov, S. STTM: an efficient approach to estimating news impact on stock movement direction. {\em PeerJ Computer Science}. \textbf{8} pp. e1156 (2022) 
+% \bibitem[sharaf(2022)]{sharaf2022survey}Sharaf, M., Hemdan, E., El-Sayed, A. \& El-Bahnasawy, N. A survey on recommendation systems for financial services. {\em Multimedia Tools And Applications}. \textbf{81}, 16761-16781 (2022) 
+% \bibitem[ozbayoglu(2020)]{ozbayoglu2020survey}Ozbayoglu, A., Gudelek, M. \& Sezer, O. Deep learning for financial applications: A survey. {\em Applied Soft Computing}. \textbf{93} pp. 106384 (2020)   
+% \bibitem[shih(2014)]{shih2014evolution}Shih, Y., Chen, S., Lee, C. \& Chen, P. The evolution of capital asset pricing models. {\em Review Of Quantitative Finance And Accounting}. \textbf{42}, 415-448 (2014) 
+% \bibitem[Ming(2012)]{Ming2012}Tsai, M. \& Wang, C. Post-Modern Portfolio Theory for Information Retrieval. {\em Procedia Computer Science}. (2012) 
+% \bibitem[Mohan(2019)]{Mohan2019}Mohan, S., Mullapudi, S., Sammeta, S., Vijayvergia, P. \& Anastasiu, D. Stock Price Prediction Using News Sentiment Analysis. {\em 2019 IEEE Fifth International Conference On Big Data Computing Service And Applications (BigDataService)}. (2019) 
+% \bibitem[Kaya(2010)]{Kaya2010}Kaya, M. \& Karsligil, M. Stock price prediction using financial news articles. {\em 2010 2nd IEEE International Conference On Information And Financial Engineering}. (2010) 
+% \bibitem[Lee(2014)]{Lee2014OnTI}Lee, H., Surdeanu, M., MacCartney, B. \& Jurafsky, D. On the Importance of Text Analysis for Stock Price Prediction. {\em LREC}. (2014) 
+% \bibitem[Yun(2019)]{Yun2019}Yun, H., Sim, G. \& Seok, J. Stock Prices Prediction using the Title of Newspaper Articles with Korean Natural Language Processing. {\em 2019 International Conference On Artificial Intelligence In Information And Communication (ICAIIC)}. (2019) 
+% \bibitem[Shynkevich(2015)]{Shynkevich2015}Shynkevich, Y., McGinnity, T., Coleman, S. \& Belatreche, A. Stock price prediction based on stock-specific and sub-industry-specific news articles. {\em 2015 International Joint Conference On Neural Networks (IJCNN)}. (2015) 
+% \bibitem[Dong(2020)]{Dong2020}Dong, Y., Yan, D., Almudaifer, A., Yan, S., Jiang, Z. \& Zhou, Y. BELT: A Pipeline for Stock Price Prediction Using News. {\em 2020 IEEE International Conference On Big Data (Big Data)}. (2020) 
+% \bibitem[Shah(2018)]{Shah2018}Shah, D., Isah, H. \& Zulkernine, F. Predicting the Effects of News Sentiments on the Stock Market. {\em 2018 IEEE International Conference On Big Data (Big Data)}. (2018) 
+% \bibitem[Cheng(2010)]{Cheng2010}Cheng, S. Forecasting the change of intraday stock price by using text mining news of stock. {\em 2010 International Conference On Machine Learning And Cybernetics}. (2010) 
+% \bibitem[Tang(2009)]{Tang2009}Tang, X., Yang, C. \& Zhou, J. Stock Price Forecasting by Combining News Mining and Time Series Analysis. {\em 2009 IEEE/WIC/ACM International Joint Conference On Web Intelligence And Intelligent Agent Technology}. (2009) 
+% \bibitem[Kaushal(2017)]{Kaushal2017}Kaushal, A. \& Chaudhary, P. News and events aware stock price forecasting technique. {\em 2017 International Conference On Big Data, IoT And Data Science (BID)}. (2017) 
+% \bibitem[Yu(2017)]{Yu2017}Yu, Y., Wang, S. \& Zhang, L. Stock price forecasting based on BP neural network model of network public opinion. {\em 2017 2nd International Conference On Image, Vision And Computing (ICIVC)}. (2017) 
+% \bibitem[Yang(2018)]{Yang2018}Yang, L., Zhang, Z., Xiong, S., Wei, L., Ng, J., Xu, L. \& Dong, R. Explainable Text-Driven Neural Network for Stock Prediction. {\em 2018 5th IEEE International Conference On Cloud Computing And Intelligence Systems (CCIS)}. (2018) 
+% \bibitem[Khairi(2019)]{Khairi2019}Khairi, T., Zaki, R. \& Mahmood, W. Stock Price Prediction using Technical, Fundamental and News based Approach. {\em 2019 2nd Scientific Conference Of Computer Sciences (SCCS)}. (2019) 
+% \bibitem[Hagenau(2012)]{Hagenau2012}Hagenau, M., Liebmann, M., Hedwig, M. \& Neumann, D. Automated News Reading: Stock Price Prediction Based on Financial News Using Context-Specific Features. {\em 2012 45th Hawaii International Conference On System Sciences}. (2012) 
+% \bibitem[Kim(2019)]{Kim2019}Kim, J., Seo, J., Lee, M. \& Seok, J. Stock Price Prediction Through the Sentimental Analysis of News Articles. {\em 2019 Eleventh International Conference On Ubiquitous And Future Networks (ICUFN)}. (2019) 
+% \bibitem[Guo(2020)]{Guo2020}Guo, Y. Stock Price Prediction Based on LSTM Neural Network: the Effectiveness of News Sentiment Analysis. {\em 2020 2nd International Conference On Economic Management And Model Engineering (ICEMME)}. (2020) 
+% \bibitem[Ray(2021)]{Ray2021}Ray, P., Ganguli, B. \& Chakrabarti, A. A Hybrid Approach of Bayesian Structural Time Series With LSTM to Identify the Influence of News Sentiment on Short-Term Forecasting of Stock Price. {\em IEEE Transactions On Computational Social Systems}. (2021) 
+% \bibitem[Gidfalvi(2001)]{Gidfalvi2001UsingNA}Gidófalvi, G. Using News Articles to Predict Stock Price Movements.  (2001) 
+% \bibitem[Mittermayer(2004)]{Mittermayer2004}Mittermayer, M. Forecasting Intraday stock price trends with text mining techniques. {\em 37th Annual Hawaii International Conference On System Sciences, 2004. Proceedings Of The}. (2004) 
+% \bibitem[Xie(2013)]{Xie2013}Xie, B., Passonneau, R., Wu, L. \& Creamer, G. Semantic Frames to Predict Stock Price Movement. {\em ACL 2013 - 51st Annual Meeting Of The Association For Computational Linguistics, Proceedings Of The Conference}. (2013) 
+% \bibitem[Chua(2009)]{Chua2009ASD}Chua, C., Milosavljevic, M. \& Curran, J. A Sentiment Detection Engine for Internet Stock Message Boards. {\em ALTA}. (2009) 
+% \bibitem[Devitt(2007)]{Devitt2007}Devitt, A. \& Ahmad, K. Sentiment Polarity Identification in Financial News: A Cohesion-based Approach. {\em Proceedings Of The Association For Computational Linguistics (ACL)}. (2007,1) 
+% \bibitem[Haider(2011)]{Haider2011}Haider, S. \& Mehrotra, R. Corporate News Classification and Valence Prediction: A Supervised Approach. {\em Proceedings Of The 2nd Workshop On Computational Approaches To Subjectivity And Sentiment Analysis}. pp. 175-181 (2011) 
+% \bibitem[Kogan(2009)]{Kogan2009}Kogan, S., Levin, D., Routledge, B., Sagi, J. \& Smith, N. Predicting Risk from Financial Reports with Regression. (Association for Computational Linguistics,2009) 
+% \bibitem[Deng(2018)]{Deng2018}Deng, Y., Xie, Q. \& Wang, Y. Research on investor sentiment and stock market prediction based on Weibo text. {\em 2018 International Conference On Security, Pattern Analysis, And Cybernetics (SPAC)}. pp. 1-5 (2018) 
+% \bibitem[Huan(2020)]{Huan2020}Ji, X., Wang, J. \& Yan, Z. A stock price prediction method based on deep learning technology. {\em International Journal Of Crowd Science}. \textbf{5} pp. 55-72 (2021) 
+% \bibitem[Bollen(2011)]{Bollen2011}Bollen, J., Mao, H. \& Zeng, X. Twitter mood predicts the stock market. {\em Journal Of Computational Science}. \textbf{2} pp. 1-8 (2011) 
+% \bibitem[HAGENAU(2013)]{HAGENAU2013}Hagenau, M., Liebmann, M. \& Neumann, D. Automated news reading: Stock price prediction based on financial news using context-capturing features. {\em Decision Support Systems}. \textbf{55}, 685-697 (2013), https://www.sciencedirect.com/science/article/pii/S0167923613000651 
+% \bibitem[Duong(2016)]{Duong2016}Duong, D., Nguyen, T. \& Dang, M. Stock Market Prediction Using Financial News Articles on Ho Chi Minh Stock Exchange. (Association for Computing Machinery,2016), https://doi.org/10.1145/2857546.2857619 
+% \bibitem[Gao(2010)]{Gao2010}Gao, Y., Zhou, L., Zhang, Y., Xing, C., Sun, Y. \& Zhu, X. Sentiment classification for stock news. {\em 5th International Conference On Pervasive Computing And Applications}. pp. 99-104 (2010) 
+% \bibitem[Liu(2007)]{Liu2007}Liu, Y., Huang, X., An, A. \& Yu, X. ARSA: A Sentiment-Aware Model for Predicting Sales Performance Using Blogs. {\em Proceedings Of The 30th Annual International ACM SIGIR Conference On Research And Development In Information Retrieval}. pp. 607-614 (2007), https://doi.org/10.1145/1277741.1277845 
+% \bibitem[KOHZADI(1996)]{KOHZADI1996}Kohzadi, N., Boyd, M., Kermanshahi, B. \& Kaastra, I. A comparison of artificial neural network and time series models for forecasting commodity prices.  (1996), https://www.sciencedirect.com/science/article/pii/0925231295000208 
+% \bibitem[Wuthrich(1998)]{Wuthrich1998}Wuthrich, B., Cho, V., Leung, S., Permunetilleke, D., Sankaran, K. \& Zhang, J. Daily stock market forecast from textual web data.  (1998) 
+% \bibitem[Joshi(2016)]{Joshi2016}Kalyani, J., Bharathi, P. \& Jyothi, P. Stock trend prediction using news sentiment analysis.  (2016) 
+% \bibitem[Nagar(2012)]{Nagar2012}Nagar, A. \& Hahsler, M. Using Text and Data Mining Techniques to extract Stock Market Sentiment from Live News Streams.  (2012) 
+% \bibitem[Lillian(2008)]{Lillian2008}Pang, B. \& Lee, L. Opinion Mining and Sentiment Analysis.  (2008), https://doi.org/10.1561/1500000011 
+% \bibitem[Yu(2019)]{Yu2019}Yu, M. \& Wu, J. CEAM: A Novel Approach Using Cycle Embeddings with Attention Mechanism for Stock Price Prediction. {\em 2019 IEEE International Conference On Big Data And Smart Computing (BigComp)}. (2019) 
+% \bibitem[Qin(2017)]{Qin2017}Qin, Y., Song, D., Chen, H., Cheng, W., Jiang, G. \& Cottrell, G. A Dual-Stage Attention-Based Recurrent Neural Network for Time Series Prediction.  (2017) 
+% \bibitem[Ly(2020)]{Ly2020}Ly, T. \& Nguyen, K. Do Words Matter: Predicting IPO Performance from Prospectus Sentiment. {\em 2020 IEEE 14th International Conference On Semantic Computing (ICSC)}. (2020) 
+% \bibitem[NGUYEN(2015)]{NGUYEN2015}Nguyen, T., Shirai, K. \& Velcin, J. Sentiment analysis on social media for stock movement prediction. {\em Expert Systems With Applications}. (2015), https://www.sciencedirect.com/science/article/pii/S0957417415005126 
+% \bibitem[Kanavos(2020)]{Kanavos2020}Kanavos, A., Vonitsanos, G., Mohasseb, A. \& Mylonas, P. An Entropy-based Evaluation for Sentiment Analysis of Stock Market Prices using Twitter Data. {\em 2020 15th International Workshop On Semantic And Social Media Adaptation And Personalization (SMA}. (2020) 
+% \bibitem[Li(2013)]{Li2013}Li Im, T., Wai San, P., Kim On, C., Alfred, R. \& Anthony, P. Analysing market sentiment in financial news using lexical approach. {\em 2013 IEEE Conference On Open Systems (ICOS)}. (2013) 
+% \bibitem[taboada(2011)]{taboada2011}Taboada, M., Brooke, J., Tofiloski, M., Voll, K. \& Stede, M. Lexicon-based methods for sentiment analysis. {\em Computational Linguistics}. (2011) 
+% \bibitem[turney(2002)]{turney2002}Turney, P. \& Littman, M. Unsupervised learning of semantic orientation from a hundred-billion-word corpus. {\em ArXiv Preprint Cs/0212012}. (2002) 
+% \bibitem[Sharma(2019)]{Sharma2019}Sharma, V., Khemnar, R., Kumari, R. \& Mohan, B. Time Series with Sentiment Analysis for Stock Price Prediction. {\em 2019 2nd International Conference On Intelligent Communication And Computational Techniques (ICCT)}. (2019) 
+% \bibitem[Mehta(2021)]{Mehta2021}Mehta, Y., Malhar, A. \& Shankarmani, R. Stock Price Prediction using Machine Learning and Sentiment Analysis. {\em 2021 2nd International Conference For Emerging Technology (INCET)}. (2021) 
+% \bibitem[Mendoza(2022)]{Mendoza2022}Mendoza-Urdiales, R., Núñez-Mora, J., Santillán-Salgado, R. \& Valencia-Herrera, H. Twitter Sentiment Analysis and Influence on Stock Performance Using Transfer Entropy and EGARCH Methods. {\em Entropy}. (2022), https://www.mdpi.com/1099-4300/24/7/874 
+% \bibitem[YADAV(2020)]{YADAV2020}Yadav, A., Jha, C. \& Sharan, A. Optimizing LSTM for time series prediction in Indian stock market. {\em Procedia Computer Science}. (2020), https://www.sciencedirect.com/science/article/pii/S1877050920307237, International Conference on Computational Intelligence and Data Science 
+% \bibitem[Mankar(2018)]{Mankar2018}Mankar, T., Hotchandani, T., Madhwani, M., Chidrawar, A. \& Lifna, C. Stock Market Prediction based on Social Sentiments using Machine Learning. {\em 2018 International Conference On Smart City And Emerging Technology (ICSCET)}. (2018) 
+% \bibitem[Wang(2018)]{Wang2018}Wang, Z., Ho, S. \& Lin, Z. Stock Market Prediction Analysis by Incorporating Social and News Opinion and Sentiment. {\em 2018 IEEE International Conference On Data Mining Workshops (ICDMW)}. (2018) 
+% \bibitem[Darapaneni(2022)]{Darapaneni2022}Darapaneni, N., Paduri, A., Sharma, H., Manjrekar, M., Hindlekar, N., Bhagat, P., Aiyer, U. \& Agarwal, Y. Stock Price Prediction using Sentiment Analysis and Deep Learning for Indian Markets. (arXiv,2022), https://arxiv.org/abs/2204.05783 
+% \bibitem[Batra(2018)]{Batra2018}Batra, R. \& Daudpota, S. Integrating StockTwits with sentiment analysis for better prediction of stock price movement. {\em 2018 International Conference On Computing, Mathematics And Engineering Technologies (iCoMET)}. (2018) 
+% \bibitem[Sonkiya(2021)]{Sonkiya2021}Sonkiya, P., Bajpai, V. \& Bansal, A. Stock price prediction using BERT and GAN. (arXiv,2021), https://arxiv.org/abs/2107.09055 
+% \bibitem[Ruan(2020)]{Ruan2020}Ruan, J., Wu, W. \& Luo, J. Stock Price Prediction Under Anomalous Circumstances. {\em 2020 IEEE International Conference On Big Data (Big Data)}. (2020) 
+% \bibitem[Song(2020)]{Song2020}Song, C., Chen, W., Fu, L. \& Arshad, A. Improving Stock Price Prediction Based on Investing Sentiments. {\em 2020 IEEE 6th International Conference On Computer And Communications (ICCC)}. (2020) 
+% \bibitem[Pooja(2018)]{Pooja2018}Pooja, B., Kanakaraddi, S. \& Raikar, M. Sentiment Based Stock Market Prediction. {\em 2018 International Conference On Computational Techniques, Electronics And Mechanical Systems (CTEMS)}. (2018) 
+% \bibitem[AlAradi(2020)]{AlAradi2020}Al Aradi, M. \& Hewahi, N. Prediction of Stock Price and Direction Using Neural Networks: Datasets Hybrid Modeling Approach. {\em 2020 International Conference On Data Analytics For Business And Industry: Way Towards A Sustainable Economy (ICDABI)}. (2020) 
+% \bibitem[Malwana(2020)]{Malwana2020}Malawana, M. \& Rathnayaka, R. The Public Sentiment analysis within Big data Distributed system for Stock market prediction– A case study on Colombo Stock Exchange. {\em 2020 5th International Conference On Information Technology Research (ICITR)}. (2020) 
+% \bibitem[Kalra(2019)]{Kalra2019}Kalra, S. \& Prasad, J. Efficacy of News Sentiment for Stock Market Prediction. {\em 2019 International Conference On Machine Learning, Big Data, Cloud And Parallel Computing (COMITCon)}. (2019) 
+% \bibitem[Sarode(2019)]{Sarode2019}Sarode, S., Tolani, H., Kak, P. \& Lifna, C. Stock Price Prediction Using Machine Learning Techniques. {\em 2019 International Conference On Intelligent Sustainable Systems (ICISS)}. (2019) 
+% \bibitem[Coelho(2019)]{Coelho2019}Coelho, J., D\'almeida, D., Coyne, S., Gilkerson, N., Mills, K. \& Madiraju, P. Social Media and Forecasting Stock Price Change. {\em 2019 IEEE 43rd Annual Computer Software And Applications Conference (COMPSAC)}. (2019) 
+% \bibitem[Aasi(2021)]{Aasi2021}Aasi, B., Imtiaz, S., Qadeer, H., Singarajah, M. \& Kashef, R. Stock Price Prediction Using a Multivariate Multistep LSTM: A Sentiment and Public Engagement Analysis Model. {\em 2021 IEEE International IOT, Electronics And Mechatronics Conference (IEMTRONICS)}. (2021) \bibitem[Alamsyah(2018)]{Alamsyah2018}Alamsyah, A., Arasyi, M. \& Rikumahu, B. Supporting Investment Decision Using Socio-Economic Issues Exploration and Stock Price Prediction. {\em 2018 International Symposium On Advanced Intelligent Informatics (SAIN)}. (2018) 
+% \bibitem[Sangsavate(2019)]{Sangsavate2019}Sangsavate, S., Tanthanongsakkun, S. \& Sinthupinyo, S. Stock Market Sentiment Classification from FinTech News. {\em 2019 17th International Conference On ICT And Knowledge Engineering (ICT\&KE)}. (2019) 
+% \bibitem[Mishev(2019)]{Mishev2019}Mishev, K., Gjorgjevikj, A., Vodenska, I., Chitkushev, L., Souma, W. \& Trajanov, D. Forecasting Corporate Revenue by Using Deep-Learning Methodologies. {\em 2019 International Conference On Control, Artificial Intelligence, Robotics \& Optimization (ICCAIRO)}. (2019) 
+% \bibitem[Jessica(2019)]{Jessica2019}Jessica \& Oetama, R. Sentiment Analysis on Official News Accounts of Twitter Media in Predicting Facebook Stock. {\em 2019 5th International Conference On New Media Studies (CONMEDIA)}. (2019) 
+% \bibitem[LienMinh(2018)]{LienMinh2018}Lien Minh, D., Sadeghi-Niaraki, A., Huy, H., Min, K. \& Moon, H. Deep Learning Approach for Short-Term Stock Trends Prediction Based on Two-Stream Gated Recurrent Unit Network. {\em IEEE Access}. (2018) 
+% \bibitem[Roslan(2018)]{Roslan2018}Asraf Roslan, M. \& Fazalul Rahiman, M. Stock Prediction Using Sentiment Analysis in Twitter for Day Trader. {\em 2018 9th IEEE Control And System Graduate Research Colloquium (ICSGRC)}. (2018) 
+% \bibitem[Wu(2019)]{Wu2019}Wu, J., Yang, C., Liu, K. \& Huang, M. A Deep Learning Model for Dimensional ValenceArousal Intensity Prediction in Stock Market. {\em 2019 IEEE 10th International Conference On Awareness Science And Technology (iCAST)}. (2019) 
+% \bibitem[Attanasio(2019)]{Attanasio2019}Attanasio, G., Cagliero, L., Garza, P. \& Baralis, E. Combining News Sentiment and Technical Analysis to Predict Stock Trend Reversal. {\em 2019 International Conference On Data Mining Workshops (ICDMW)}. (2019) 
+% \bibitem[Qiu(2019)]{Qiu2019}Qiu, H. \& Liu, F. Candlestick Analysis in Forecasting U.S. Stock Market: Are They Informative and Effective. {\em 2019 IEEE 4th International Conference On Big Data Analytics (ICBDA)}. (2019) 
+% \bibitem[Kesavan(2020)]{Kesavan2020}Kesavan, M., Karthiraman, J., Ebenezer, R. \& Adhithyan, S. Stock Market Prediction with Historical Time Series Data and Sentimental Analysis of Social Media Data. {\em 2020 4th International Conference On Intelligent Computing And Control Systems (ICICCS)}. (2020) 
+% \bibitem[Thu(2021)]{Thu2021}Thu, H., Thanh, T. \& Quy, T. A Neighborhood Deep Neural Network Model using Sliding Window for Stock Price Prediction. {\em 2021 IEEE International Conference On Big Data And Smart Computing (BigComp)}. (2021) 
+% \bibitem[Nishitha(2020)]{Nishitha2020}Nishitha, S., Bano, S., Reddy, G., Arja, P. \& Niharika, G. Stock Price Prognosticator using Machine Learning Techniques. {\em 2020 4th International Conference On Electronics, Communication And Aerospace Technology (ICECA)}. (2020) 
+% \bibitem[Kumar(2020)]{Kumar2020}Kumar, D. Stock Forecasting Using Natural Language and Recurrent Network. {\em 2020 3rd International Conference On Emerging Technologies In Computer Engineering: Machine Learning And Internet Of Things (ICETCE)}. (2020) 
+% \bibitem[Peng(2019)]{Peng2019}Peng, D. Analysis of Investor Sentiment and Stock Market Volatility Trend Based on Big Data Strategy. {\em 2019 International Conference On Robots \& Intelligent System (ICRIS)}. (2019) 
+% \bibitem[Merello(2018)]{Merello2018}Merello, S., Picasso Ratto, A., Ma, Y., Luca, O. \& Cambria, E. Investigating Timing and Impact of News on the Stock Market. {\em 2018 IEEE International Conference On Data Mining Workshops (ICDMW)}. (2018) 
+% \bibitem[Reddy(2020)]{Reddy2020}Reddy, N., Naresh, E. \& Kumar B.P., V. Predicting Stock Price Using Sentimental Analysis Through Twitter Data. {\em 2020 IEEE International Conference On Electronics, Computing And Communication Technologies (CONECCT)}. (2020)
+% \bibitem[Kumar(2021)]{Kumar2021}Kumar, S., Gupta, R., Kumar, P. \& Aggarwal, N. A Survey on Artificial Neural Network based Stock Price Prediction Using Various Methods. {\em 2021 5th International Conference On Intelligent Computing And Control Systems (ICICCS)}. (2021) 
+% \bibitem[Lauren(2019)]{Lauren2019}Lauren, P. \& Watta, P. A Conversational User Interface for Stock Analysis. {\em 2019 IEEE International Conference On Big Data (Big Data)}. (2019) 
+% \bibitem[Jariwala(2020)]{Jariwala2020}Jariwala, G., Agarwal, H. \& Jadhav, V. Sentimental Analysis of News Headlines for Stock Market. {\em 2020 IEEE International Conference For Innovation In Technology (INOCON)}. (2020) 
+% \bibitem[okoli(2015)]{okoli2015guide}Okoli, C. A guide to conducting a standalone systematic literature review. {\em Communications Of The Association For Information Systems}. \textbf{37} (2015) 
+% \bibitem[rosenberg(1973)]{rosenberg1973}Rosenberg, B. \& McKibben, W. The Prediction of Systematic and Specific Risk in Common Stocks. {\em Journal Of Financial And Quantitative Analysis}. \textbf{8}, 317-333 (1973) 
+% \bibitem[Xu(2020)]{Xu2020}Xu, Y., Lin, W. \& Hu, Y. Stock Trend Prediction using Historical Data and Financial Online News. {\em 2020 IEEE Intl Conf On Parallel \& Distributed Processing With Applications, Big Data \& Cloud Computing, Sustainable Computing \& Communications, Social Computing \& Networking (ISPA/BDCloud/SocialCom/SustainCom)}. (2020) 
+% \bibitem[Qi(2021)]{Qi2021}Qi, Y., Yu, W. \& Deng, Y. Stock prediction under COVID-19 based on LSTM. {\em 2021 IEEE Asia-Pacific Conference On Image Processing, Electronics And Computers (IPEC)}. (2021) 
+% \bibitem[Chao(2019)]{Chao2019}Chao, C., Ting, I., Tsai, T. \& Chen, M. Opinion Mining and the Visualization of Stock Selection in Quantitative Trading. {\em 2019 International Conference On Technologies And Applications Of Artiﬁcial Intelligence (TAAI)}. (2019) 
+% \bibitem[Yıldırım(2018)]{Yıldırım2018}Yıldırım, S., Jothimani, D., Kavaklıoğlu, C. \& Başar, A. Classification of "Hot News" for Financial Forecast Using NLP Techniques. {\em 2018 IEEE International Conference On Big Data (Big Data)}. (2018) 
+% \bibitem[Cakra(2015)]{Cakra2015}Cakra, Y. \& Distiawan Trisedya, B. Stock price prediction using linear regression based on sentiment analysis. {\em 2015 International Conference On Advanced Computer Science And Information Systems (ICACSIS)}. (2015) 
+% \bibitem[Suman(2017)]{Suman2017}Suman, N., Gupta, P. \& Sharma, P. Analysis of Stock Price Flow Based on Social Media Sentiments. {\em 2017 International Conference On Next Generation Computing And Information Systems (ICNGCIS)}. (2017) 
+% \bibitem[Sun(2017)]{Sun2017}Sun, T., Wang, J., Zhang, P., Cao, Y., Liu, B. \& Wang, D. Predicting Stock Price Returns Using Microblog Sentiment for Chinese Stock Market. {\em 2017 3rd International Conference On Big Data Computing And Communications (BIGCOM)}. (2017) 
+% \bibitem[Zhang(2015)]{Zhang2015}Zhang, W., Li, C., Ye, Y., Li, W. \& Ngai, E. Dynamic Business Network Analysis for Correlated Stock Price Movement Prediction. {\em IEEE Intelligent Systems}. (2015) 
+% \bibitem[Tiwari(2017)]{Tiwari2017}Tiwari, S., Bharadwaj, A. \& Gupta, S. Stock price prediction using data analytics. {\em 2017 International Conference On Advances In Computing, Communication And Control (ICAC3)}. (2017) 
+% \bibitem[Yin2016]{Yin(2016)}Yin, L., Zhang, N., He, L. \& Fang, W. A Study of Relationship between Investor Sentiment and Stock Price Based on Text Mining. {\em 2016 International Conference On Identification, Information And Knowledge In The Internet Of Things (IIKI)}. (2016) 
+% \bibitem[JiahongLi(2017)]{JiahongLi2017}Li, J., Bu, H. \& Wu, J. Sentiment-aware stock market prediction: A deep learning method. {\em 2017 International Conference On Service Systems And Service Management}. (2017) 
+% \bibitem[Nivetha(2017)]{Nivetha2017}Nivetha, R. \& Dhaya, C. Developing a Prediction Model for Stock Analysis. {\em 2017 International Conference On Technical Advancements In Computers And Communications (ICTACC)}. (2017) 
+% \bibitem[Wang(2016)]{Wang2016}Wang, Y. \& Wang, Y. Using social media mining technology to assist in price prediction of stock market. {\em 2016 IEEE International Conference On Big Data Analysis (ICBDA)}. (2016) 
+% \bibitem[Day(2016)]{Day2016}Day, M. \& Lee, C. Deep learning for financial sentiment analysis on finance news providers. {\em 2016 IEEE/ACM International Conference On Advances In Social Networks Analysis And Mining (ASONAM)}. (2016) 
+% \bibitem[Coyne(2017)]{Coyne2017}Coyne, S., Madiraju, P. \& Coelho, J. Forecasting Stock Prices Using Social Media Analysis. {\em 2017 IEEE 15th Intl Conf On Dependable, Autonomic And Secure Computing, 15th Intl Conf On Pervasive Intelligence And Computing, 3rd Intl Conf On Big Data Intelligence And Computing And Cyber Science And Technology Congress(DASC/PiCom/DataCom/ CyberSciTech)}. (2017) 
+% \bibitem[GuiyingWei(2015)]{GuiyingWei2015}Wei, G., Zhang, W. \& Zhou, L. Stock trends prediction combining the public opinion analysis. {\em 2015 International Conference On Logistics, Informatics And Service Sciences (LISS)}. (2015) 
+% \bibitem[Alostad(2015)]{Alostad2015}Alostad, H. \& Davulcu, H. Directional Prediction of Stock Prices Using Breaking News on Twitter. {\em 2015 IEEE/WIC/ACM International Conference On Web Intelligence And Intelligent Agent Technology (WI-IAT)}. (2015) 
+% \bibitem[Pagolu(2016)]{Pagolu2016}Pagolu, V., Reddy, K., Panda, G. \& Majhi, B. Sentiment analysis of Twitter data for predicting stock market movements. {\em 2016 International Conference On Signal Processing, Communication, Power And Embedded System (SCOPES)}. (2016) 
+% \bibitem[Devi(2015)]{Devi2015}Devi, K., Bhaskaran, V. \& Kumar, G. w optimized SVM for stock market prediction. {\em 2015 International Conference On Innovations In Information, Embedded And Communication Systems (ICIIECS)}. (2015) 
+% \bibitem[Li(2017)]{Li2017}Li, R., Fu, D. \& Zheng, Z. An Analysis of the Correlation between Internet Public Opinion and Stock Market. {\em 2017 4th International Conference On Information Science And Control Engineering (ICISCE)}. (2017) 
+% \bibitem[succi(2022)]{succi2022}Bugayenko, Y., Daniakin, K., Farina, M., Ikramov, R., Jolha, F., Kholmatova, Z., Kruglov, A., Pedrycz, W. \& Succi, G. Metrics for Recommending Corrective and Preventive Actions (CAPAs) in Software Development Projects: a Systematic Literature Review. (IEEE Dataport,2022), https://dx.doi.org/10.21227/1zxb-q808 
+% \bibitem[vadlamudi(2017)]{vadlamudi2017}Vadlamudi, S. Stock Market Prediction using Machine Learning: A Systematic Literature Review. {\em American Journal Of Trade And Policy}. (2017)
+% \end{thebibliography}
+% }
+
+
+\bibliography{RHSbib}
+
+\end{document}

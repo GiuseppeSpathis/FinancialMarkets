@@ -1,0 +1,144 @@
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{eqtabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% with the array package, \setlength{\extrarowheight}{0.3cm}
+
+\usepackage{color}
+\usepackage{array}
+
+
+\newcommand{\eqtabularsize}{\normalsize}
+\renewcommand{\eqtabularsize}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% the color after \nl needs to be persistent, so this stuff
+% allow cells in a table to continue with the global color,
+% rather than color in a cell just setting the local cell.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\let\real@aftergroup\aftergroup
+\def\fake@aftergroup{\@ifnextchar\reset@color
+  {\let\aftergroup\real@aftergroup \@gobble}%
+  {\real@aftergroup}}
+
+\newcommand{\startcolor}{\let\aftergroup\fake@aftergroup\color}
+\newcommand{\stopcolor}{\color{black}\reset@color}
+
+\global\let\arraycurcolor\relax
+
+\newcommand{\blueformula}{\gdef\arraycurcolor{\color{blue}}\color{blue}}
+\newcommand{\blueformulaoff}{\gdef\arraycurcolor{\color{black}}\color{black}}
+\newcommand{\nl}{\blueformula\\}  % rowcolor does background, not foreground \startcolor{coloreqn}
+
+\makeatother
+
+\makeatletter
+
+\newcommand{\savearraystretch}[1]{%
+  \skip@=\baselineskip%
+  \renewcommand{\arraystretch}{#1}%
+  \vspace*{-#1mm}%
+  \baselineskip=\skip@%
+}
+
+\newcommand{\restorearraystretch}{%
+  \renewcommand{\arraystretch}{\defaultarraystretch}%
+  \color{black}%
+  \ignorespacesafterend\noindent%
+}
+
+
+\newcommand{\eqmc}[3]{\multicolumn{#1}{#2}{\arraycurcolor#3}}
+
+\newenvironment{eqtabularbase}[3]{%
+  \savearraystretch{#1}
+  #2%
+  \everymath{\displaystyle}%
+  \let\origlabel\label%
+  \thickmuskip=10mu plus 5mu minus 3mu %% default was 5mu
+  \medmuskip=5mu plus 5mu minus 3mu %% default was 5mu
+  \begin{equation}\nonumber%
+    \renewcommand\label{\yesnumber\origlabel}%
+    %\providecommand{\mc}{}
+    %\renewcommand{\mc}{\eqmc}
+    % \renewcommand\mc[2]{\PackageError{#1#2: Please do not use mc in eqtabular, but eqmc instead}}%
+    \def\yesnumber{\global\@eqnswtrue\stepcounter{equation}}
+    \begin{array}{#3}}%
+    {\end{array}%
+    \color{black}%
+    \end{equation}%
+    \blueformulaoff%
+    \restorearraystretch%
+  }
+
+
+\newenvironment{eqtabularlarge}{%
+  \begin{Large}%
+  \begin{eqtabularbase}{1.8}{\eqtabularsize}{ *{40}{>{\arraycurcolor}c}} }%
+{\end{eqtabularbase}\end{Large}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabularlarge*}{%
+  \begin{Large}%
+  \begin{eqtabularbase}{2.4}{\eqtabularsize}{*{40}{>{\arraycurcolor}c}} }%
+{\end{eqtabularbase}\end{Large}\ignorespacesafterend\noindent}
+
+
+
+\newenvironment{eqtabularl}[1]{\begin{eqtabularbase}{1.3}{\eqtabularsize}{#1}}{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabular}{\begin{eqtabularl}{*{40}{>{\arraycurcolor}c}} }{\end{eqtabularl}\ignorespacesafterend\noindent}
+
+%\newenvironment{eqtabular}{%
+%  \begin{eqtabularbase}{1.3}{\eqtabularsize}}%
+%{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+
+
+\newenvironment{eqtabular*}{%
+  \begin{eqtabularbase}{2.4}{\eqtabularsize}{*{40}{>{\arraycurcolor}c}} }%
+{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabular**}{%
+  \begin{eqtabularbase}{3.0}{\eqtabularsize}{*{40}{>{\arraycurcolor}c}}}%
+{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabular***}{%
+  \begin{eqtabularbase}{5.0}{\eqtabularsize}{*{40}{>{\arraycurcolor}c}}}%
+{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabularsmc}{%
+  \begin{eqtabularbase}{2.0}{\small}{*{40}{>{\arraycurcolor}c}}}%
+{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabularsmall}{%
+  \begin{eqtabularbase}{2.0}{\footnotesize}{*{40}{>{\arraycurcolor}c}}}%
+{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabularsmall*}{%
+  \begin{eqtabularbase}{2.5}{\footnotesize}{*{40}{>{\arraycurcolor}c}}}%
+{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabulardense}{%
+  \begin{eqtabularbase}{1.75}{\footnotesize}{*{40}{>{\arraycurcolor}c}}}%
+{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\newenvironment{eqtabulartiny}{%
+  \begin{eqtabularbase}{2.4}{\scriptsize}{*{40}{>{\arraycurcolor}c}}}%
+{\end{eqtabularbase}\ignorespacesafterend\noindent}
+
+\makeatother
+
+\makeatletter
+\newenvironment{shrunkintexttable}{
+  \skip@=\baselineskip
+  \renewcommand{\arraystretch}{0.98}%
+  \small
+  \baselineskip=\skip@
+  \begin{center}
+        \begin{tabular}
+        }{
+        \end{tabular}\end{center}\renewcommand{\arraystretch}{2}%
+      \ignorespacesafterend}
+\makeatother
+

@@ -1,0 +1,96 @@
+\begin{tikzpicture}
+  \centering
+  \begin{axis}[
+%   small,
+        scale only axis,
+        ybar,
+        % axis on top,
+        height=\axisHeight,
+        width=\axisWidth,
+        bar width=\barWidth,
+        % x=-0.5,
+        % ymajorgrids,
+        % tick align=inside,
+        % major grid style={draw=white},
+        enlarge y limits={value=.02,upper},
+        % legend pos = north east,
+        % legend style={at={(1, 1.2)},anchor=north},
+        ymin=0, ymax=45,
+        % axis x line*=bottom,
+        % axis y line*=right,
+        % y axis line style={opacity=0},
+        % tickwidth=0pt,
+        % enlarge x limits=true,
+        % legend style={
+        %     at={(0.3,0.95)},
+        %     anchor=north,
+        %     legend columns=-1,
+        %     /tikz/every even column/.append style={column sep=0.5cm}
+        % },
+        ylabel={\# Studies},
+        xticklabel style={rotate=90},
+        symbolic x coords={
+USA, 
+Other,
+China,
+India,
+Italy,
+Cananda,
+% (Iran, 1)
+% (Italy, 1)
+Iran,
+Spain,
+% (Norway, 1)
+UK,
+Australia,
+Malaysia,
+South Korea,
+Germany,
+% USA,
+% India,
+% China,
+% Finland,
+% Brazil,
+% Canada,
+% England,
+% Germany,
+% Australia,
+% Belgium,
+% Iran,
+% Italy,
+% Japan,
+% Malaysia,
+% Norway,
+% Spain,
+% Sweden,
+% Taiwan
+},
+        xlabel = {Country},
+       xtick=data,
+       nodes near coords={
+        \pgfmathprintnumber[precision=0]{\pgfplotspointmeta}
+       }
+    ]
+   \addplot [draw=barDrawColor,fill=barFillColor] coordinates {
+ % (India, 12)
+(USA, 40)
+(Other, 39)
+(China, 34)
+(India, 31)
+(Italy, 9)
+(Cananda, 7)
+% (Iran, 1)
+% (Italy, 1)
+(Iran, 6)
+(Spain, 5)
+% (Norway, 1)
+(UK, 5)
+(Australia, 5)
+(Malaysia, 5)
+(South Korea, 4)
+(Germany, 4)
+};
+
+    % \legend{Publication Country}
+  \end{axis}
+  \end{tikzpicture}

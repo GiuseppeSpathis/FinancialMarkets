@@ -1,0 +1,114 @@
+\ProvidesPackage{rfs}[2014/04/01]
+
+% see diagram in Kopka+Daly, p35.  much of this could be done via geometry.sty instead
+%
+
+\setlength{\topmargin}{-0.5in} % will be changed below
+\setlength{\textheight}{8.6in}
+\setlength{\textwidth}{6.2in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\parskip}{2mm}
+
+\widowpenalty=200000              %/*150*/ No Widows at top of page
+\displaywidowpenalty=20000        %/*50*/
+\clubpenalty=100000               %/ this is really orphanpenalty.  No orphans at bottom of page
+
+ 
+% Page 181f in Kopka+Daly has a whole set of float definitions that can be useful
+\setcounter{topnumber}{4}             % maximum number of floats on a page top
+\setcounter{totalnumber}{10}          % maximum number of floats anywhere
+\renewcommand{\floatpagefraction}{.75}
+\renewcommand{\dblfloatpagefraction}{.75}
+
+                                % Most of the styles don't allow floats to be placed at place `h'ere.
+                                % You can allow it if you use [h] or you override the settings withL
+\renewcommand{\fps@figure}{htbp}  % defaults
+\renewcommand{\fps@table}{htbp}   % defaults
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{setspace}
+
+
+\usepackage{natbib}
+\providecommand{\citeasnoun}{\cite}
+
+
+\usepackage{graphicx}    % \includegraphics
+\graphicspath{{.}}
+\usepackage{xcolor}      % \color
+\usepackage{colornames}  % extended names, such as Maroon
+\usepackage{booktabs}    % \toprule, \midrule, \bottomrule
+\usepackage{amsmath}     % almost always useful
+\usepackage{needspace}   % almost always useful
+
+
+\usepackage{ifpdf}
+\ifpdf{}\else\PackageError{rfs}{%
+  You should be using pdflatex and not latex}{%
+  You can ignore this error message, but at your own risk!
+  The old LaTeX is definitely outdated by now, and could cause
+  all sorts of weird interactions.}
+\fi
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[hang,labelfont=bf,position=top]{caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\rfsminsectspace{0.4}
+\def\rfsminsubsectspace{0.2}
+
+\let\origsectionrfs\section
+\renewcommand{\section}{\needspace{\rfsminsectspace\textheight}\origsectionrfs}
+\let\origsubsectionrfs\subsection
+\renewcommand{\subsection}{\needspace{\rfsminsubsectspace\textheight}\origsubsectionrfs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\thesection}{\arabic{section}} 
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}} 
+
+\renewcommand{\thanks}{\footnotetext}
+
+\setstretch{1.50}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \usepackage[%
+% pdftex,%
+% pdfauthor={Me}%
+% pdfstartview={XYZ null null 1},%
+% pdffitwindow=true,%
+% pdfcreator={pdflatex}
+% letterpaper,%
+% colorlinks,% %<-------------------------------------------30.03.2023
+% breaklinks=true,%
+% backref=true,%
+% plainpages=false,%
+% bookmarks=false,%
+% pdfpagelabels,% this may add another page
+% pdfpagemode=None%
+% ]{hyperref}
+% \providecommand{\mailto}[1]{{\href{mailto:#1}{#1}}}
+
+\makeatletter
+\def\@urlcolor{darkblue}
+\def\@linkcolor{darkred}
+\def\@citecolor{darkblue}
+\hypersetup{urlcolor=darkblue}
+\hypersetup{linkcolor=darkred}
+\hypersetup{citecolor=darkblue}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{notestoeditor}{\begin{color}{Maroon}\noindent\textbf{To The Editor:}\\[-1\baselineskip]}{\end{color}}
+\renewcommand{\thesection}{\arabic{section}} 
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}} 
+
