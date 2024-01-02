@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tikz} % Required for tikzpicture
+\usepackage{tikz-uml} % Required for UML diagrams
+\usetikzlibrary{positioning} % Required for positioning nodes
+\usepackage[hidelinks]{hyperref}
+
+
+\title{binanceUML}
+\author{giuseppespathis }
+\date{January 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\begin {tikzpicture}
+
+\umlactor[x=-3]{TRADER}
+
+
+
+\begin {umlsystem} [fill=red!10 ] {Binance Spot Test Network}
+
+\umlusecase [x=1, y=0, width=2.2cm ] { account Info \\GET /api/v3/account}
+\umlusecase [x=2, y=-2.3, width=2.3cm ] { my trades history \\ GET api/v3/myTrades }
+\umlusecase [x=3, y=-5.3, width=2cm ] { make order \\ POST /api/v3/order }
+\umlusecase [x=1, y=-7, width=2cm ] {delete order \\ DELETE /api/v3/order}
+\umlusecase [x=7, y=-12, width=1.5cm ] {analyze potential trade}
+\umlusecase [x=7, y=-1, width=3.8cm ] {delete order and replace with a new one \\ POST /api/v3/order/cancelReplace}
+
+
+
+\end{umlsystem}
+
+\umlassoc{TRADER}{usecase-1}
+\umlassoc{TRADER}{usecase-2}
+\umlassoc{TRADER}{usecase-3}
+\umlassoc{TRADER}{usecase-4}
+
+\umlinclude [name=incl] {usecase-3}{usecase-5}
+\umlinclude [name=incl] {usecase-4}{usecase-5}
+\umlVHextend{usecase-6}{usecase-4}
+\umlVHextend{usecase-6}{usecase-3}
+
+\end{tikzpicture}
+
+\footnotetext{\url{https://www.overleaf.com/8287975426fzktytqkzpkh\#d7b64c}}
+
+
+\end{document}
