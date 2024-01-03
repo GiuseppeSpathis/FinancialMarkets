@@ -24,13 +24,17 @@
 
 \begin {umlsystem} [fill=red!10 ] {Binance Spot Test Network}
 
-\umlusecase [x=1, y=0, width=2.2cm ] { account Info \\GET /api/v3/account}
-\umlusecase [x=2, y=-2.3, width=2.3cm ] { my trades history \\ GET api/v3/myTrades }
-\umlusecase [x=3, y=-5.3, width=2cm ] { make order \\ POST /api/v3/order }
-\umlusecase [x=1, y=-7, width=2cm ] {delete order \\ DELETE /api/v3/order}
+\umlusecase [x=1, y=0, width=1.5cm ] { account Info}
+\umlnote[x=11, y=0]{usecase-1}{GET /api/v3/account}
+\umlusecase [x=2, y=-2.3, width=2cm ] {my trades history}
+\umlnote[x=11, y=-2.3]{usecase-2}{GET api/v3/myTrades}
+\umlusecase [x=3, y=-5, width=1.5cm ] {make order}
+\umlnote[x=11, y=-7]{usecase-3}{POST /api/v3/order}
+\umlusecase [x=1, y=-7, width=1.5cm ] {delete order}
+\umlnote[x=11, y=-9]{usecase-4}{DELETE /api/v3/order}
 \umlusecase [x=7, y=-12, width=1.5cm ] {analyze potential trade}
-\umlusecase [x=7, y=-1, width=3.8cm ] {delete order and replace with a new one \\ POST /api/v3/order/cancelReplace}
-
+\umlusecase [x=7, y=-1, width=2cm ] {delete order and replace with a new one}
+\umlnote[x=10.4, y=-5, width=4.2cm]{usecase-6}{POST /api/v3/order/cancelReplace}
 
 
 \end{umlsystem}
